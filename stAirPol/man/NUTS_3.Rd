@@ -9,12 +9,9 @@
 data(NUTS_3)
 }
 \description{
-NUTS_3 to PLZ Mapping
+Maps each german PLZ to a NUTS_3 code
 }
 \examples{
 data(NUTS_3)
-}
-\references{
-(\href{TODO})
 }
 \keyword{datasets}

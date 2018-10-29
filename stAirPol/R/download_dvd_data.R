@@ -11,6 +11,7 @@
 #' for a longer historical timeframe
 #'
 #' @export
+#' @importFrom readr read_lines
 #'
 #' @examples
 #' download_dvd_data(obs = 'wind')
@@ -37,8 +38,11 @@ download_dwd_data <- function(obs, path, type = 'recent') {
 
 #' setup_station_table
 #'
+#' Setup a csv file which contains informations about the stations and there
+#' coordinates
+#'
 #' @param path filepath where the informations should be stored
-#' @import readr
+#' @importFrom  readr write_csv
 #' @import data.table
 setup_station_table <- function(path) {
   f <- list.files(path, pattern = 'Metadaten_Geographie', full.names = TRUE)
@@ -55,5 +59,5 @@ setup_station_table <- function(path) {
   stations <- rbindlist(stations)
   stations$lon <- stations$lon / 1e5; stations$lat <- stations$lat / 1e5
   readr::write_csv(stations,
-                   path = paste0(path, 'index.csv'))
+                   path = paste0(path, '/index.csv'))
 }

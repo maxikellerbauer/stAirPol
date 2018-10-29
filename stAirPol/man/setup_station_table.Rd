@@ -10,5 +10,6 @@ setup_station_table(path)
 \item{path}{filepath where the informations should be stored}
 }
 \description{
-setup_station_table
+Setup a csv file which contains informations about the stations and there
+coordinates
 }

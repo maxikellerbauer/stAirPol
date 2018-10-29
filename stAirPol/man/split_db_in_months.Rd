@@ -12,3 +12,9 @@ split_db_in_months(path)
 \description{
 Split databases into monthly databases
 }
+\examples{
+split_db_in_months(path = './')
+}
+\author{
+Volker Schmid
+}

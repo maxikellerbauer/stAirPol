@@ -1,6 +1,7 @@
 #' Download Open Transport Map Data
 #'
-#' That functions downloads all informations about traffic volumen in Germany
+#' That functions downloads all informations about traffic volumen in Germany.
+#' See \url{http://opentransportmap.info/} for more informations.
 #' @param path filepath where the informations should be stored
 #'
 #' @export
@@ -16,4 +17,5 @@ download_OTM <- function(path) {
       Sys.sleep(time = runif(1,0.07,0.19))
     })
   })
+  NULL
 }

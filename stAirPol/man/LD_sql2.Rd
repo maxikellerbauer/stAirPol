@@ -27,3 +27,6 @@ no return
 \description{
 Write luftdaten to mysqlite database
 }
+\author{
+Volker Schmid
+}

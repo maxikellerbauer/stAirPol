@@ -4,9 +4,11 @@
 #' @param path filepath where the informations should be stored
 #'
 #' @export
+#' @author Volker Schmid
+#' @import RSQLite
+#' @examples
+#' split_db_in_months(path = './')
 split_db_in_months <- function(path) {
-  library(RSQLite)
-  library(DBI)
   files <- list.files(path, full.names = TRUE, include.dirs = FALSE)
   files <- files[!grepl('/data', files)]
   for (f in files)

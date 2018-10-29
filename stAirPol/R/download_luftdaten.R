@@ -167,6 +167,7 @@ LD_sql<-function(db, end = Sys.Date()-1, source="/media/schmid/local/data/luftda
 #' @param end end data, e.g. Sys.Date()
 #'
 #' @import curl
+#' @author Volker Schmid
 #' @return files are stored in folder/
 #' @export
 LD_download<-function(folder, start="2015-10-01",end=Sys.Date(), sensortype="")
@@ -245,7 +246,7 @@ initializeDB<-function(name,start,verbose=FALSE)
 #' @param verbose print more information
 #'
 #' @import RSQLite DBI
-#'
+#' @author Volker Schmid
 #' @return no return
 #' @export
 LD_sql2<-function(start, end=Sys.Date()-1, source="/media/schmid/local/data/luftdaten/",

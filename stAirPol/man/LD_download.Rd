@@ -20,3 +20,6 @@ files are stored in folder/
 \description{
 Download csv files from archive.liftdaten.info
 }
+\author{
+Volker Schmid
+}

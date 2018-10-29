@@ -9,12 +9,12 @@
 data(plz_shape)
 }
 \description{
-PLZ shape file
+Shapefile for all german PLZ
 }
 \examples{
 data(plz_shape)
 }
 \references{
-(\href{http://www.geodatenzentrum.de/ geodaten/})
+\url{http://www.geodatenzentrum.de/geodaten/}
 }
 \keyword{datasets}

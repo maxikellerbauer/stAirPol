@@ -10,7 +10,8 @@ download_OTM(path)
 \item{path}{filepath where the informations should be stored}
 }
 \description{
-That functions downloads all informations about traffic volumen in Germany
+That functions downloads all informations about traffic volumen in Germany.
+See \url{http://opentransportmap.info/} for more informations.
 }
 \examples{
 download_OTM(path = './')
