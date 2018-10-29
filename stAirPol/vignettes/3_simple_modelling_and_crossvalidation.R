@@ -1,0 +1,151 @@
+require(stAirPol)
+require(spTimer)
+
+
+# Read the data -----------------------------------------------------------
+path = '~/stAirPol_data'
+data("mini_dataset")
+data <- clean_model_data(mini_dataset)
+
+# Fit the model -----------------------------------------------------------
+
+#' Now we want to fit a Gaussian Process model, and analyse the parameters and
+#' the model hisself.
+#' We use the following formula to spezify the covariables in the linear part
+#' of the model
+formula = value ~ humi + temp + rainhist + windhist +
+  trafficvol + log(sensor_age)
+
+#' There are tree most used modeltypes,
+#'     - Gaussian Process short GP
+#'     - Autoregessive Gaussian Process short AR
+#'     - Gaussian Predictive Process short GPP
+#' First we fit only the Gaussian Process
+model.gp.p2 <- fit_sp_model(data = data, formula = formula, model = 'GP')
+
+#' With summary we get a brief overview of the fitted parameters, and the PMCC
+#' of the model
+summary(model.gp.p2)
+
+#' Now we can do a deeper specification of the Model
+#' First we add our own Prioris to the model, for more details see ?spT.priors
+priors <- spT.priors(model = "GP", inv.var.prior = Gamm(a = 2, b = 1),
+                     beta.prior = Norm(0, 10^4))
+#' Covariance function for the spatial effects we want to use the matern
+#' covariance, for more choises see ?spT.Gibbs
+cov.fnc = "matern"
+cov.fnc = "exponential"
+#' We change the method how the parameter for the spatial decay should be fitted,
+#' see ?spT.decay for more details
+#' We choose a Gamma(2,1) Prioridistribution with the tuningparameter 0.1,
+#' the tuningparameter should be choosen that the acceptance rate for phi is
+#' between 20%-40%.
+spatial.decay = spT.decay(distribution = Gamm(a = 2, b = 1), tuning = 0.25)
+#' If it's wanted to get some feedback during the fitting process, we can
+#' choose a number of feedback messages we want to arrive
+report = 5
+#' We are able to perfom a on the fly transormations of the target variable
+scale.transform = "SQRT"
+model.gp.p2.mod <- fit_sp_model(data = data,
+                            formula = formula,
+                            model = 'GP',
+                            priors = priors,
+                            cov.fnc = cov.fnc,
+                            report = report,
+                            scale.transform = scale.transform,
+                            spatial.decay = spatial.decay)
+summary(model.gp.p2.mod)
+
+
+
+# Test the model ----------------------------------------------------------
+
+#' Now we have created two diffrent kinds of Gaussian Process Models. With a
+#' crossvalidatioin we want to the them against each other.
+#' Therefore we specify a train and a test set with 75% random training sensors
+training_set <- get_test_and_training_set(data, sampel_size = 0.75,
+                                      random.seed = 220292)
+#' Now we are able the train the models only the the choosen training sensors
+#' by adding training_set = training_set into the function
+model.gp.p2 <- fit_sp_model(data = data, formula = formula, model = 'GP',
+                            training_set = training_set)
+model.gp.p2.mod <- fit_sp_model(data = data,
+                                formula = formula,
+                                model = 'GP',
+                                priors = priors,
+                                cov.fnc = cov.fnc,
+                                report = report,
+                                training_set = training_set,
+                                scale.transform = scale.transform,
+                                spatial.decay = spatial.decay)
+#' we are able to perform with the well known predict function predictions for
+#' that models, by adding the training_set, only predictions for the test
+#' sensors will be calculated.
+pred.gp.p2 <- predict(model.gp.p2, data, training_set)
+pred.gp.p2.mod <- predict(model.gp.p2.mod, data.p2, training_set)
+
+#' To evaluate the predictive performance we use evaluate_prediction()
+evaluate_prediction(pred.gp.p2)
+evaluate_prediction(pred.gp.p2.mod)
+
+#' There are also some validation plots availible
+#' Fitted vs. predicted:
+plot(pred.gp.p2.mod)
+#' Fitted vs. predicted seperated by time:
+plot(pred.gp.p2.mod, time_dimension = TRUE)
+
+
+
+# Various bayesian Models -------------------------------------------------
+
+#' There are more Model besides the Gaussian Process
+#' autogressive Gaussian Process:
+
+priors.ar <- spT.priors(model = "AR", inv.var.prior = Gamm(a = 2, b = 1),
+                        beta.prior = Norm(0, 10^4))
+model.ar.p2 <- fit_sp_model(data = data.p2,
+                            formula = formula,
+                            model = 'AR',
+                            priors = priors.ar,
+                            cov.fnc = cov.fnc,
+                            report = report,
+                            training_set = training_set,
+                            scale.transform = scale.transform,
+                            spatial.decay = spatial.decay)
+
+pred.ar.p2 <- predict(model.ar.p2, data.p2, training_set)
+evaluate_prediction(pred.ar.p2)
+plot(pred.ar.p2)
+
+#' The last model is the Gaussian Predictive Process, here we have to specify
+#' two more things:
+#'    - How much knots should be used?
+#'    - How should the knots be placed?
+priors.gpp <- spT.priors(model = "GPP", inv.var.prior = Gamm(a = 2, b = 1),
+                        beta.prior = Norm(0, 10^4))
+model.gpp.p2 <- fit_sp_model(data = data.p2,
+                            formula = formula,
+                            model = 'GPP',
+                            priors = priors.gpp,
+                            cov.fnc = cov.fnc,
+                            count_knots = 5,
+                            knots_method = 'grid',
+                            report = report,
+                            training_set = training_set,
+                            scale.transform = scale.transform,
+                            spatial.decay = spatial.decay)
+
+pred.gpp.p2 <- predict(model.gpp.p2, data.p2, training_set)
+evaluate_prediction(pred.gpp.p2)
+plot(pred.gpp.p2)
+
+
+
+
+# Compair the models ------------------------------------------------------
+
+gridExtra::grid.arrange(grobs = list(
+  plot(pred.gp.p2, time_dimension = TRUE) + ggtitle('GP'),
+  plot(pred.ar.p2, time_dimension = TRUE) + ggtitle('AR'),
+  plot(pred.gpp.p2, time_dimension = TRUE) + ggtitle('GPP')
+))

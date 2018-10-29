@@ -11,7 +11,7 @@ using namespace Rcpp;
 //'
 //' @export
 //' @importFrom Rcpp evalCpp
-//' @useDynLib spAirPol
+//' @useDynLib stAirPol
 //' @return bounded numeric vector
 // [[Rcpp::export]]
 NumericVector hist_exp_cpp(NumericVector y, double lambda, int lag) {

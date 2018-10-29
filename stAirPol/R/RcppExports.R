@@ -5,7 +5,7 @@
 #'
 #' @export
 #' @importFrom Rcpp evalCpp
-#' @useDynLib spAirPol
+#' @useDynLib stAirPol
 #' @return bounded numeric vector
 hist_exp_cpp <- function(y, lambda, lag) {
     .Call('_stAirPol_hist_exp_cpp', PACKAGE = 'stAirPol', y, lambda, lag)

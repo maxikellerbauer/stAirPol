@@ -7,7 +7,7 @@
 #'
 #' @param sensor_data data as returned by \link{get_sensor_measured_values}
 #' @param sensors data as returned by \link{get_sensors}
-#' @param quantiles_to_use
+#' @inheritParams clean_model_data
 #' @param grid a object as returnet by \link{make_grid_traffic}
 #' @param agg_info a object as returnet by \link{aggregation_information}
 #' @param times_IQR remove outliers,which are more then times_IQR * IQR away

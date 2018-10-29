@@ -11,6 +11,7 @@
 #' @export
 #' @importFrom lubridate ymd_hms
 #' @return all measured values
+#'
 sql_load_sensor_measured_values <- function(sensor_id, date_pattern,
                                             variable_type, path) {
   con <- connection(date_pattern, variable_type, path = path)
@@ -32,6 +33,7 @@ sql_load_sensor_measured_values <- function(sensor_id, date_pattern,
 #'
 #' @return all measured values
 #' @export
+#'
 get_sensor_measured_values <- function(sensors, date_pattern, path) {
   variable_type <- names(sensors)
   sensor_data <- list()
