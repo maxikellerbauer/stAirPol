@@ -6,7 +6,7 @@ require(ggplot2)
 
 # User Input --------------------------------------------------------------
 #' Spezify the data path which contains the collected data.
-path = '~/stAirPol_data'
+path = '~/stAirPol_data2'
 
 #' For which German Postcode do you want to model air pollution data?
 #' Use directly one Postcode or see ?get_postcodes_for_landkreis and
@@ -23,7 +23,7 @@ m.grid_cellsize <- 0.004
 #' NOTE: currently are only whole months supported, so the startdate is floored
 #' and the end_date is ceiilinged.
 start_date = "2017-12-01"
-end_date = "2017-12-05"
+end_date = "2017-12-31"
 
 #' The spezification which is needed is the aggreation interval and the
 #' timeshift which is apply to the data. We choose an aggregation_interval of 8

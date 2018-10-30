@@ -32,7 +32,6 @@ download_dwd_data <- function(obs, path, type = 'recent') {
       system(paste0('cd ', path, '; unzip -n ', wind[x]))
     })
   })
-  setup_station_table(path)
 }
 
 
@@ -44,8 +43,9 @@ download_dwd_data <- function(obs, path, type = 'recent') {
 #' @param path filepath where the informations should be stored
 #' @importFrom  readr write_csv
 #' @import data.table
+#' @export
 setup_station_table <- function(path) {
-  f <- list.files(path, pattern = 'Metadaten_Geographie', full.names = TRUE)
+  f <- list.files(path, pattern = 'Metadaten_Geographie', full.names = FALSE)
   stations <- list()
   for (i in seq_along(f)) {
     stations_id <- as.vector(gsub("[^0-9]", "", f[i]))

@@ -5,7 +5,7 @@
 #'
 #' @examples
 #' rename_datasets()
-rename_datasets <- function()  {
+rename_datasets <- function() {
   setnames(data.rainhist.p1, "prediction", 'rain')
   setnames(grid.rainhist.p1, "prediction", 'rain')
   setnames(data.rainhist.p2, "prediction", 'rain')

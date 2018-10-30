@@ -4,9 +4,10 @@ require(data.table)
 
 #' Here we specify the folder where all data should be saved
 #' Also the timerange is secified here
-path = '~/stAirPol_data'
+path = '~/stAirPol_data2'
 start_date = "2017-12-01"
-end_date = "2017-12-05"
+end_date = "2017-12-31"
+dir.create(path)
 
 
 # (1) Download data: luftdaten.info ---------------------------------------
@@ -23,6 +24,7 @@ dir.create(paste0(path, "/db/"))
 LD_sql2(start = start_date, end = end_date,
         source = paste0(path, "/luftdaten/"),
         dbname = paste0(path, "/db/"))
+dir.create(paste0(path, "/db/data"))
 split_db_in_months(paste0(path, "/db"))
 download_sensor_age(path = path)
 
@@ -32,6 +34,7 @@ download_sensor_age(path = path)
 dir.create(paste0(path, "/dwd/"))
 download_dwd_data(obs = 'wind', path = paste0(path, "/dwd/"))
 download_dwd_data(obs = 'precipitation', path = paste0(path, "/dwd/"))
+setup_station_table(paste0(path, "/dwd/"))
 
 
 # (3) Download data: Open Transport Map -----------------------------------

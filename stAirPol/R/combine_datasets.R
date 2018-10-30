@@ -11,7 +11,7 @@ combine_datasets <- function() {
                                      list(data.p1, data.humi.p1, data.temp.p1,
                                           data.rainhist.p1, data.windhist.p1,
                                           data.traffic.p1, sensor_age)))
-  grid.final.p1 <- data.table(Reduce(function(x, y) dplyr::left_join(x, y),
+  grid.final.p1 <<- data.table(Reduce(function(x, y) dplyr::left_join(x, y),
                                      list(grid.humi.p1, grid.temp.p1,
                                           grid.rainhist.p1, grid.windhist.p1,
                                           grid.traffic.p1)))
