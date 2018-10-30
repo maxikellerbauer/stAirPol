@@ -3,10 +3,9 @@ require(spTimer)
 
 
 # Read the data -----------------------------------------------------------
-path = '~/stAirPol_data'
-data("mini_dataset")
-data <- clean_model_data(mini_dataset)
-
+data("muc_airPol_p2")
+data <- clean_model_data(muc_airPol_p2)
+data <- data[timestamp != max(timestamp)]
 # Fit the model -----------------------------------------------------------
 
 #' Now we want to fit a Gaussian Process model, and analyse the parameters and
@@ -82,7 +81,7 @@ model.gp.p2.mod <- fit_sp_model(data = data,
 #' that models, by adding the training_set, only predictions for the test
 #' sensors will be calculated.
 pred.gp.p2 <- predict(model.gp.p2, data, training_set)
-pred.gp.p2.mod <- predict(model.gp.p2.mod, data.p2, training_set)
+pred.gp.p2.mod <- predict(model.gp.p2.mod, data, training_set)
 
 #' To evaluate the predictive performance we use evaluate_prediction()
 evaluate_prediction(pred.gp.p2)
@@ -103,7 +102,7 @@ plot(pred.gp.p2.mod, time_dimension = TRUE)
 
 priors.ar <- spT.priors(model = "AR", inv.var.prior = Gamm(a = 2, b = 1),
                         beta.prior = Norm(0, 10^4))
-model.ar.p2 <- fit_sp_model(data = data.p2,
+model.ar.p2 <- fit_sp_model(data = data,
                             formula = formula,
                             model = 'AR',
                             priors = priors.ar,
@@ -113,7 +112,7 @@ model.ar.p2 <- fit_sp_model(data = data.p2,
                             scale.transform = scale.transform,
                             spatial.decay = spatial.decay)
 
-pred.ar.p2 <- predict(model.ar.p2, data.p2, training_set)
+pred.ar.p2 <- predict(model.ar.p2, data, training_set)
 evaluate_prediction(pred.ar.p2)
 plot(pred.ar.p2)
 
@@ -123,21 +122,22 @@ plot(pred.ar.p2)
 #'    - How should the knots be placed?
 priors.gpp <- spT.priors(model = "GPP", inv.var.prior = Gamm(a = 2, b = 1),
                         beta.prior = Norm(0, 10^4))
-model.gpp.p2 <- fit_sp_model(data = data.p2,
+model.gpp.p2 <- fit_sp_model(data = data,
                             formula = formula,
                             model = 'GPP',
                             priors = priors.gpp,
                             cov.fnc = cov.fnc,
-                            count_knots = 5,
-                            knots_method = 'grid',
+                            knots_count = 20,
+                            knots_method = 'random',
                             report = report,
                             training_set = training_set,
                             scale.transform = scale.transform,
                             spatial.decay = spatial.decay)
 
-pred.gpp.p2 <- predict(model.gpp.p2, data.p2, training_set)
+pred.gpp.p2 <- predict(model.gpp.p2, data, training_set)
 evaluate_prediction(pred.gpp.p2)
 plot(pred.gpp.p2)
+plot(pred.gpp.p2, time_dimension = TRUE)
 
 
 
