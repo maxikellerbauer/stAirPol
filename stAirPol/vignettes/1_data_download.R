@@ -4,7 +4,7 @@ require(data.table)
 
 #' Here we specify the folder where all data should be saved
 #' Also the timerange is secified here
-path = '~/stAirPol_data2'
+path = '~/stAirPol_data'
 start_date = "2017-12-01"
 end_date = "2017-12-31"
 dir.create(path)
@@ -40,9 +40,3 @@ setup_station_table(paste0(path, "/dwd/"))
 # (3) Download data: Open Transport Map -----------------------------------
 dir.create(paste0(path, "/otm/"))
 download_OTM(path = paste0(path, "/otm/"))
-
-
-# (4) Delete all unnecessary stuff ----------------------------------------
-#' To save space on your disk, everything which isn't needed will deleted now
-f <- list.files(path = paste0(path, "/dwd"), pattern = 'TODO', full.names = TRUE)
-file.remove(f)

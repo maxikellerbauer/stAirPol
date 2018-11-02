@@ -1,11 +1,13 @@
 require(stAirPol)
 require(spTimer)
+require(ggplot2)
+require(data.table)
 
 
 # Read the data -----------------------------------------------------------
 data("muc_airPol_p2")
-data <- clean_model_data(muc_airPol_p2)
-data <- data[timestamp != max(timestamp)]
+#' remove outliers in the data
+data <- clean_model_data(muc_airPol_p2, timesIQR = 1.5)
 # Fit the model -----------------------------------------------------------
 
 #' Now we want to fit a Gaussian Process model, and analyse the parameters and
@@ -25,14 +27,16 @@ model.gp.p2 <- fit_sp_model(data = data, formula = formula, model = 'GP')
 #' With summary we get a brief overview of the fitted parameters, and the PMCC
 #' of the model
 summary(model.gp.p2)
+#' Trace plots of the MCMC-Iterations
+plot(model.gp.p2)
+dev.off()
 
 #' Now we can do a deeper specification of the Model
 #' First we add our own Prioris to the model, for more details see ?spT.priors
 priors <- spT.priors(model = "GP", inv.var.prior = Gamm(a = 2, b = 1),
                      beta.prior = Norm(0, 10^4))
-#' Covariance function for the spatial effects we want to use the matern
+#' Covariance function for the spatial effects we want to use the exponential
 #' covariance, for more choises see ?spT.Gibbs
-cov.fnc = "matern"
 cov.fnc = "exponential"
 #' We change the method how the parameter for the spatial decay should be fitted,
 #' see ?spT.decay for more details
@@ -97,8 +101,8 @@ plot(pred.gp.p2.mod, time_dimension = TRUE)
 
 # Various bayesian Models -------------------------------------------------
 
-#' There are more Model besides the Gaussian Process
-#' autogressive Gaussian Process:
+#' There are more Model besides the Gaussian Process.
+#' For example the autogressive Gaussian Process:
 
 priors.ar <- spT.priors(model = "AR", inv.var.prior = Gamm(a = 2, b = 1),
                         beta.prior = Norm(0, 10^4))
@@ -120,6 +124,7 @@ plot(pred.ar.p2)
 #' two more things:
 #'    - How much knots should be used?
 #'    - How should the knots be placed?
+#' Detailed options for that question are shown in 4_advanced_modelling.R
 priors.gpp <- spT.priors(model = "GPP", inv.var.prior = Gamm(a = 2, b = 1),
                         beta.prior = Norm(0, 10^4))
 model.gpp.p2 <- fit_sp_model(data = data,
@@ -144,8 +149,14 @@ plot(pred.gpp.p2, time_dimension = TRUE)
 
 # Compair the models ------------------------------------------------------
 
+evaluate_prediction_table(list('pred.gp.p2' = pred.gp.p2,
+                               'pred.gp.p2.mod' = pred.gp.p2.mod,
+                               'pred.ar.p2' = pred.ar.p2,
+                               'pred.gpp.p2' = pred.gpp.p2))
+
 gridExtra::grid.arrange(grobs = list(
-  plot(pred.gp.p2, time_dimension = TRUE) + ggtitle('GP'),
-  plot(pred.ar.p2, time_dimension = TRUE) + ggtitle('AR'),
-  plot(pred.gpp.p2, time_dimension = TRUE) + ggtitle('GPP')
+  plot(pred.gp.p2) + ggtitle('GP'),
+  plot(pred.gp.p2.mod) + ggtitle('mod GP'),
+  plot(pred.ar.p2) + ggtitle('AR'),
+  plot(pred.gpp.p2) + ggtitle('GPP')
 ))

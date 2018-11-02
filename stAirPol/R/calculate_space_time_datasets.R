@@ -28,16 +28,20 @@ calculate_space_time_datasets <- function() {
   data_temp <- get_model_frame(sensor_data[['temperature']], sensors[['temperature']])
   data.temp.p1 <<- smooth_space_time_variables(sensor_data = data_temp,
                                               grid = sensors[['P1']][, .(lon, lat)],
-                                              agg_info = m.agg_info)
+                                              agg_info = m.agg_info,
+                                              times_IQR = 1.5)
   data.temp.p2 <<- smooth_space_time_variables(sensor_data = data_temp,
                                               grid = sensors[['P2']][, .(lon, lat)],
-                                              agg_info = m.agg_info)
+                                              agg_info = m.agg_info,
+                                              times_IQR = 1.5)
   grid.temp.p1 <<- smooth_space_time_variables(sensor_data = data_temp,
                                               grid = grid.traffic.p1[, .(lon, lat)],
-                                              agg_info = m.agg_info)
+                                              agg_info = m.agg_info,
+                                              times_IQR = 1.5)
   grid.temp.p2 <<- smooth_space_time_variables(sensor_data = data_temp,
                                               grid = grid.traffic.p2[, .(lon, lat)],
-                                              agg_info = m.agg_info)
+                                              agg_info = m.agg_info,
+                                              times_IQR = 1.5)
   check_prediction(data.humi.p1)
   check_prediction(grid.humi.p1)
   check_prediction(data.humi.p2)

@@ -4,7 +4,7 @@
 \name{muc_airPol_p2_grid}
 \alias{muc_airPol_p2_grid}
 \title{muc_airPol_p2_grid}
-\format{An object of class \code{data.table} (inherits from \code{data.frame}) with 75040 rows and 10 columns.}
+\format{An object of class \code{data.table} (inherits from \code{data.frame}) with 129828 rows and 12 columns.}
 \usage{
 data(muc_airPol_p2_grid)
 }

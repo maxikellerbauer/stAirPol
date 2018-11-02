@@ -35,18 +35,20 @@ model.gpp <- fit_sp_model(data = data,
                           knots_count = 25,
                           knots_method = 'random',
                           report = 5,
-                          training_set = training_set,
                           scale.transform = scale.transform,
                           spatial.decay = spatial.decay)
 #' Predict the gridpoints for each day
-pred.gpp <- predict(model.gpp, muc_airPol_p2_grid)
+#' To avoid shotage of RAM, we split the data set, and predict only small
+#' subsamples
+# pred.gpp <- predict(model.gpp, muc_airPol_p2_grid)
+pred.gpp <- predict_split(model.gpp, new_data = muc_airPol_p2_grid)
 
 # Aggregate the grid to a administrative level ----------------------------
 #' Get a shapefile for munich
 require(dplyr)
 require(osmdata)
 #' Load the shapefile from Open Street Map
-q <- getbb("munich") %>%
+q <- getbb("munich germany") %>%
   opq() %>%
   add_osm_feature("boundary", "administrative")
 shape_muc <- osmdata_sf(q)$osm_multipolygons
@@ -56,7 +58,7 @@ shape_muc <- shape_muc[as.character(shape_muc$admin_level) == 10, ]
 shape_muc <- shape_muc[grepl('Bezirksteil', shape_muc$name), ]
 #' Take a short look on the shapefile
 ggplot(data = shape_muc) +
-  geom_sf()
+  geom_sf() + theme_void()
 #' Now, we calculate which grid points is in what 'Stadtbezirksteil'
 grid_coords <- unique(pred.gpp[, .(lon, lat, sensor_id)])
 grid_coords$shape <- as.numeric(pbmcapply::pbmclapply(1:nrow(grid_coords),
@@ -71,7 +73,7 @@ pred.gpp.agg <- pred.gpp[, .(prediction = mean(prediction)), by = shape]
 #' remove points which does not contain in the shapefile
 pred.gpp.agg <- pred.gpp.agg[!is.na(shape)][order(shape)]
 shape_muc$mean <- 0
-shape_muc$mean[pred.gpp$shape] <- pred.gpp$prediction
+shape_muc$mean[pred.gpp.agg$shape] <- pred.gpp.agg$prediction
 #' remove shapes where no gridpoints are detected
 shape_muc <- shape_muc[shape_muc$mean != 0, ]
 #' Plot the calculated aggregation
@@ -114,7 +116,4 @@ g <- ggplot(data = pred.gpp.agg2, aes(x = lon, y = lat, fill = prediction)) +
                  x.max = max(pred.gpp.agg2$lon),
                  y.min = min(pred.gpp.agg2$lat),
                  y.max = max(pred.gpp.agg2$lat))
-
-
-
-
+print(g)

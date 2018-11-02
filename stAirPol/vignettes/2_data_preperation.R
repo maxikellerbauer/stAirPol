@@ -16,7 +16,7 @@ m.plz <- c(80539)
 
 #' Now you have to decide what the gridcellsize should be used, see
 #' ?sf::st_make_grid for informations about the cellsize parameter
-m.grid_cellsize <- 0.004
+m.grid_cellsize <- 0.003
 
 #' The next spezification which is needed is the timerange, please specify
 #' the start and the end date
@@ -31,7 +31,7 @@ end_date = "2017-12-31"
 #' ?lubridate::round_date. The timeshift is applied to the data.
 #' Run the print method on the object for more information.
 m.agg_info <- aggregation_information(timeshift = lubridate::hours(0),
-                                      aggregation_interval = '1 day')
+                                      aggregation_interval = '24 hours')
 print(m.agg_info)
 
 
