@@ -25,7 +25,7 @@ random distribution with respect to the location of the sensor. With
 if those a object is delivered, the data argument will reduced to the
 in training_set sepcified training sensors.}
 
-\item{knots}{}
+\item{knots_count}{}
 
 \item{...}{additional arguments for \link{spT.Gibbs}}
 }

@@ -1,11 +1,12 @@
-#' Title
+#' plot.stAirPol.parameters
 #'
-#' @param parmeter
+#' Plot boxplox for each parameter.
 #'
-#' @return
+#' @param parmeter a object as returned by \link{fit_subintervalls} with the
+#' option \code{return = 'parameters'}
+#'
+#' @return a ggplot2 object
 #' @export
-#'
-#' @examples
 plot.stAirPol.parameters <- function(parameter) {
   g2 <- ggplot(data = parameter, aes(x = name, group = name, y = Mean)) +
     geom_boxplot() +

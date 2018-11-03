@@ -1,11 +1,13 @@
-#' Title
+#' evaluate_prediction_table
 #'
-#' @param list
+#' Formats a table of diffrent prediction data.frames
 #'
-#' @return
+#' @param list a named list with elements of objects as returned by
+#' \link{predict.stAirPol.model}
+#'
+#' @return a data.table
+#' @import data.table
 #' @export
-#'
-#' @examples
 evaluate_prediction_table <- function(list) {
   l <- lapply(list, function(x) evaluate_prediction(pred = x))
   l <- rbindlist(l)

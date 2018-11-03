@@ -2,13 +2,17 @@
 % Please edit documentation in R/plot_parameters.R
 \name{plot.stAirPol.parameters}
 \alias{plot.stAirPol.parameters}
-\title{Title}
+\title{plot.stAirPol.parameters}
 \usage{
 \method{plot}{stAirPol.parameters}(parameter)
 }
 \arguments{
-\item{parmeter}{}
+\item{parmeter}{a object as returned by \link{fit_subintervalls} with the
+option \code{return = 'parameters'}}
+}
+\value{
+a ggplot2 object
 }
 \description{
-Title
+Plot boxplox for each parameter.
 }

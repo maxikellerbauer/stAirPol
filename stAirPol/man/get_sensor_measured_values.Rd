@@ -9,7 +9,7 @@ get_sensor_measured_values(sensors, date_pattern, path)
 \arguments{
 \item{sensors}{object as returned from the function \link{get_sensors}}
 
-\item{date_pattern}{character vector in the format `%Y-%m`}
+\item{date_pattern}{character vector in the format '%Y-%m'}
 
 \item{path}{filepath where the informations are stored}
 }

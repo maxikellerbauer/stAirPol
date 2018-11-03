@@ -2,18 +2,24 @@
 % Please edit documentation in R/aggregate_to_shape_file.R
 \name{aggregate_to_shape_file}
 \alias{aggregate_to_shape_file}
-\title{Title}
+\title{aggregate_to_shape_file}
 \usage{
-aggregate_to_shape_file(prediction, shape, scale_bar_dist = 3)
+aggregate_to_shape_file(prediction, shape, scale_bar_dist = 3,
+  mc.cores = parallel::detectCores() - 1)
 }
 \arguments{
-\item{scale_bar_dist}{}
+\item{prediction}{a spatio-temporal prediction as returned by \link{predict.stAirPol.model}}
+
+\item{shape}{a shapefile of the class sd}
+
+\item{scale_bar_dist}{Kilometers of the scalebar}
+
+\item{mc.cores}{how much cores should be used for parallelisation, default is
+one core less you maximum number of detected cores.}
+}
+\value{
+a ggplot object with the aggregation map
 }
 \description{
-Title
-}
-\examples{
-remove points which does not contain in the shapefile
-remove shapes where no gridpoints are detected
-Plot the calculated aggregation
+Aggregate the spatio-temporal prediction to the elements of a shape file
 }

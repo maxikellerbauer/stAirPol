@@ -1,21 +1,33 @@
-#' Title
+#' aggregate_to_shape_file
 #'
-#' @param prediction
-#' @param shape
-#' @param scale_bar_dist
+#' Aggregate the spatio-temporal prediction to the elements of a shape file
 #'
-#' @return
+#' @param prediction a spatio-temporal prediction as returned by \link{predict.stAirPol.model}
+#' @param shape a shapefile of the class sd
+#' @param scale_bar_dist Kilometers of the scalebar
+#' @param mc.cores how much cores should be used for parallelisation, default is
+#' one core less you maximum number of detected cores.
+#'
+#' @importFrom dplyr left_join
+#' @importFrom sf st_crs
+#' @importFrom pbmcapply pbmclapply
+#' @importFrom sf st_intersects
+#' @importFrom sf st_point
+#' @importFrom sf st_bbox
+#' @importFrom ggsn scalebar
+#' @import ggplot2
+#'
+#' @return a ggplot object with the aggregation map
 #' @export
-#'
-#' @examples
-aggregate_to_shape_file <- function(prediction, shape, scale_bar_dist = 3) {
+aggregate_to_shape_file <- function(prediction, shape, scale_bar_dist = 3,
+                                    mc.cores = parallel::detectCores() - 1) {
   grid_coords <- unique(prediction[, .(lon, lat, sensor_id)])
   grid_coords$shape <- as.numeric(pbmcapply::pbmclapply(1:nrow(grid_coords),
-                                                        function(i) {
-                                                          which(sf::st_intersects(sf::st_point(c(grid_coords[i]$lon,
-                                                                                                 grid_coords[i]$lat)),
-                                                                                  shape$geometry, sparse = FALSE))
-                                                        }, mc.cores = 4))
+                  function(i) {
+                    which(sf::st_intersects(sf::st_point(c(grid_coords[i]$lon,
+                                                           grid_coords[i]$lat)),
+                                            shape$geometry, sparse = FALSE))
+                  }, mc.cores = 4))
   prediction <- data.table(dplyr::left_join(prediction, grid_coords))
   prediction.agg <- prediction[, .(prediction = mean(prediction)), by = shape]
   #' remove points which does not contain in the shapefile

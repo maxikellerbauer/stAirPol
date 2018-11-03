@@ -16,6 +16,9 @@
 #' "GP", "truncatedGP", "AR", "GPP", and "truncatedGPP",
 #' with the first one as the default.
 #' @param knots
+#' @param knots_plot
+#' @param knots_seed
+#' @param knots_count
 #'
 #' @export
 #' @import spTimer

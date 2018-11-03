@@ -2,14 +2,37 @@
 % Please edit documentation in R/predict_split.R
 \name{predict_split}
 \alias{predict_split}
-\title{Title}
+\title{predict_split}
 \usage{
 predict_split(model, new_data, sample_count = 100,
   mc.cores = parallel::detectCores() - 1, ...)
 }
 \arguments{
+\item{model}{a spatio-temporal model as returned by \link{fit_sp_model}}
+
+\item{sample_count}{how much subsamples?, defauld is 100}
+
+\item{mc.cores}{how much cores should be used for parallelisation, default is
+one core less you maximum number of detected cores.}
+
 \item{...}{}
+
+\item{newdata}{a dataset with informations of the covariable}
+}
+\value{
+the newdata with added columns of the prediction calculations
 }
 \description{
-Title
+Perform all predictions on subsample datasets to avoid a shortage of RAM.
+}
+\examples{
+data("mini_dataset")
+mini_dataset <- clean_model_data(mini_dataset)
+formula = value ~ humi + temp + rainhist + windhist +
+  trafficvol + log(sensor_age)
+training_set <- get_test_and_training_set(mini_dataset, sampel_size = 0.75,
+                                          random.seed = 220292)
+model.gp <- fit_sp_model(data = mini_dataset, formula = formula,
+                         model = 'GP', training_set = training_set)
+pred.gp <- predict_split(model.gp, mini_dataset, training_set)
 }
