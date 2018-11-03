@@ -3,9 +3,9 @@
 #' Remove outliers from the dataset. If an outlier is detected, the entry in
 #' the column value is set to NA.
 #'
-#' @param model_data Dataset as a data.table which one time dimension in the
-#' variable timestamp and one numeric varibale with the name values
-#' @param times_IQR remove outliers,which are more then times_IQR * IQR away
+#' @param model_data Dataset as a data.table which one-time dimension in the
+#' variable timestamp and one numeric variable with the name values
+#' @param times_IQR remove outliers, which are more then times_IQR * IQR away
 #' from the median
 #'
 #' @return model_data, with all values, which are outside the timesIQR plus minus

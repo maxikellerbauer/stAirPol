@@ -2,15 +2,15 @@
 % Please edit documentation in R/combine_datasets.R
 \name{combine_datasets}
 \alias{combine_datasets}
-\title{Combine all calculated datases}
+\title{Combine all calculated datasets}
 \usage{
 combine_datasets()
 }
 \value{
-nothing, but four objects are assigned to the global envrioment
+nothing, but four objects are assigned to the global environment
 }
 \description{
-Combine all calculated datases
+Combine all calculated datasets
 }
 \examples{
 combine_datasets()

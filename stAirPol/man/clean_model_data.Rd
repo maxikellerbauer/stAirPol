@@ -7,10 +7,10 @@
 clean_model_data(model_data, timesIQR = 1.5)
 }
 \arguments{
-\item{model_data}{Dataset as a data.table which one time dimension in the
-variable timestamp and one numeric varibale with the name values}
+\item{model_data}{Dataset as a data.table which one-time dimension in the
+variable timestamp and one numeric variable with the name values}
 
-\item{times_IQR}{remove outliers,which are more then times_IQR * IQR away
+\item{times_IQR}{remove outliers, which are more then times_IQR * IQR away
 from the median}
 }
 \value{

@@ -2,7 +2,7 @@
 #'
 #' Split the sensors into a traning a test set
 #'
-#' @param sensors modeling \libnk{data.table}, should contain informations about
+#' @param sensors modeling \link{data.table}, should contain informations about
 #' the sensor_id and the coordianted in the columns \code{lon} and \code{lat}
 #' @param sampel_size double beween 0 and 1, which specifies the percentage of
 #' training sensors

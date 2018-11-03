@@ -2,12 +2,12 @@
 % Please edit documentation in R/calculate_time_datasets.R
 \name{calculate_time_datasets}
 \alias{calculate_time_datasets}
-\title{Calculate datasets and grids for wind and rain}
+\title{calculate_time_datasets}
 \usage{
 calculate_time_datasets()
 }
 \value{
-nothing, but 16 datasets get assigned to the global enviroment
+nothing, but 16 datasets get assigned to the global environment
 with the names:
 data.wind.p1, data.wind.p2, grid.wind.p1, grid.wind.p2,
 data.rain.p1, data.rain.p2, grid.rain.p1, grid.rain.p2,

@@ -7,7 +7,7 @@
 get_test_and_training_set(sensors, sampel_size = 0.75, random.seed = NULL)
 }
 \arguments{
-\item{sensors}{modeling \libnk{data.table}, should contain informations about
+\item{sensors}{modeling \link{data.table}, should contain informations about
 the sensor_id and the coordianted in the columns \code{lon} and \code{lat}}
 
 \item{sampel_size}{double beween 0 and 1, which specifies the percentage of

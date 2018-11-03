@@ -5,8 +5,8 @@
 #' @param prediction a spatio-temporal prediction as returned by \link{predict.stAirPol.model}
 #' @param shape a shapefile of the class sd
 #' @param scale_bar_dist Kilometers of the scalebar
-#' @param mc.cores how much cores should be used for parallelisation, default is
-#' one core less you maximum number of detected cores.
+#' @param mc.cores how much cores should be used for parallelization, default is
+#' one core less your maximum number of detected cores.
 #'
 #' @importFrom dplyr left_join
 #' @importFrom sf st_crs

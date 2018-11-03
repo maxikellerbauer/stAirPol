@@ -17,7 +17,7 @@ more informations}
 for a longer historical timeframe}
 }
 \description{
-That functions downloads all recent informations from the DWD
+That functions downloads all recent information’s from the DWD
 (Deutscher Wetter Dienst)
 }
 \examples{

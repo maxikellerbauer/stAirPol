@@ -14,8 +14,6 @@ if those a object is delivered, the newdata argument will reduced to the
 in training_set sepcified test sensors.}
 
 \item{...}{additional arguments}
-
-\item{model}{a spatio-temporal model as returned by \link{fit_sp_model}}
 }
 \value{
 the newdata with added columns of the prediction calculations

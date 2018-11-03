@@ -2,7 +2,7 @@
 % Please edit documentation in R/aggregation_information.R
 \name{print.stAirPol.aggregation_information}
 \alias{print.stAirPol.aggregation_information}
-\title{Print method for class stAirPol.aggregation_information}
+\title{print.stAirPol.aggregation_information}
 \usage{
 \method{print}{stAirPol.aggregation_information}(x)
 }

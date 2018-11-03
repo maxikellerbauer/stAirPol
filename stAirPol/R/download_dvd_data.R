@@ -1,7 +1,6 @@
-
 #' Download DWD Data
 #'
-#' That functions downloads all recent informations from the DWD
+#' That functions downloads all recent information’s from the DWD
 #' (Deutscher Wetter Dienst)
 #' @param obs which observation should be downloaded? See
 #' \url{ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate/hourly/} for

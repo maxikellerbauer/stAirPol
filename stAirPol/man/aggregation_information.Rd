@@ -14,7 +14,7 @@ information about the aggregation_interval units see
 ?lubridate::round_date}
 }
 \value{
-a object of the class `stAirPol.aggregation_information`
+an object of the class `stAirPol.aggregation_information`
 }
 \description{
 aggregation_information

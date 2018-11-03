@@ -14,8 +14,8 @@ aggregate_to_shape_file(prediction, shape, scale_bar_dist = 3,
 
 \item{scale_bar_dist}{Kilometers of the scalebar}
 
-\item{mc.cores}{how much cores should be used for parallelisation, default is
-one core less you maximum number of detected cores.}
+\item{mc.cores}{how much cores should be used for parallelization, default is
+one core less your maximum number of detected cores.}
 }
 \value{
 a ggplot object with the aggregation map

@@ -4,7 +4,7 @@
 \alias{plot.stAirPol.parameters}
 \title{plot.stAirPol.parameters}
 \usage{
-\method{plot}{stAirPol.parameters}(parameter)
+plot.stAirPol.parameters(parameter)
 }
 \arguments{
 \item{parmeter}{a object as returned by \link{fit_subintervalls} with the

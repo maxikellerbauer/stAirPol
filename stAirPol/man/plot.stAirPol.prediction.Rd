@@ -4,7 +4,7 @@
 \alias{plot.stAirPol.prediction}
 \title{plot.stAirPol.prediction}
 \usage{
-\method{plot}{stAirPol.prediction}(prediction, time_dimension = FALSE)
+plot.stAirPol.prediction(prediction, time_dimension = FALSE)
 }
 \arguments{
 \item{prediction}{a object as returned by \link{predict.stAirPol.model}}

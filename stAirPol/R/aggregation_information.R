@@ -5,7 +5,7 @@
 #' information about the aggregation_interval units see
 #' ?lubridate::round_date
 #'
-#' @return a object of the class `stAirPol.aggregation_information`
+#' @return an object of the class `stAirPol.aggregation_information`
 #' @export
 #' @examples
 #' m.agg_infor <- aggregation_information(timeshift = lubridate::hours(2),
@@ -19,6 +19,8 @@ aggregation_information <- function(timeshift, aggregation_interval) {
 }
 
 
+#' print.stAirPol.aggregation_information
+#'
 #' Print method for class stAirPol.aggregation_information
 #'
 #' @param x object of the class stAirPol.aggregation_information

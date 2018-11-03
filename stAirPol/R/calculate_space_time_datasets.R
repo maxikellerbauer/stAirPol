@@ -1,6 +1,8 @@
+#' calculate_space_time_datasets
+#'
 #' Calculate datasets and grids for humidity and temperature
 #'
-#' @return nothing, but 8 datasets get assigned to the global enviroment
+#' @return nothing, but 8 datasets get assigned to the global environment
 #' with the names: data.humi.p1, data.humi.p2, grid.humi.p1, grid.humi.p2,
 #' data.temp.p1, data.temp.p2, grid.temp.p1 and grid.temp.p2
 #' @export

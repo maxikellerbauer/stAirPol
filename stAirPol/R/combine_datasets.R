@@ -1,6 +1,6 @@
-#' Combine all calculated datases
+#' Combine all calculated datasets
 #'
-#' @return nothing, but four objects are assigned to the global envrioment
+#' @return nothing, but four objects are assigned to the global environment
 #' @export
 #'
 #' @examples

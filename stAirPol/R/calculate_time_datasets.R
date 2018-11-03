@@ -1,6 +1,8 @@
+#' calculate_time_datasets
+#'
 #' Calculate datasets and grids for wind and rain
 #'
-#' @return nothing, but 16 datasets get assigned to the global enviroment
+#' @return nothing, but 16 datasets get assigned to the global environment
 #' with the names:
 #' data.wind.p1, data.wind.p2, grid.wind.p1, grid.wind.p2,
 #' data.rain.p1, data.rain.p2, grid.rain.p1, grid.rain.p2,
