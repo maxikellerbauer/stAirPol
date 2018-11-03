@@ -84,6 +84,10 @@ fit_subintervalls <- function(data, grid = NULL, training_set = NULL, unit = '1 
     }
   })
   newdata <- rbindlist(pred_list)
-  class(newdata) <- c('stAirPol.prediction', class(newdata))
+  if (return == 'prediction') {
+    class(newdata) <- c('stAirPol.prediction', class(newdata))
+  } else if (return == 'parameters') {
+    class(newdata) <- c('stAirPol.parameters', class(newdata))
+  }
   newdata
 }

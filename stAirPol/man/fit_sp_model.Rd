@@ -4,8 +4,9 @@
 \alias{fit_sp_model}
 \title{fit_sp_model}
 \usage{
-fit_sp_model(data, model = "GPP", knots_method = "random",
-  training_set = NULL, knots_count = 5, ...)
+fit_sp_model(data, model = "GPP", knots_method = "grid",
+  training_set = NULL, knots_plot = FALSE, knots = NULL,
+  knots_seed = NULL, knots_count = 5, ...)
 }
 \arguments{
 \item{data}{Modelling data.frame which contains information about the
@@ -24,10 +25,7 @@ random distribution with respect to the location of the sensor. With
 if those a object is delivered, the data argument will reduced to the
 in training_set sepcified training sensors.}
 
-\item{knots_count}{Number how much knots should be used, note: if
-knots_method = 'grid', the knots_count will represent the the square root
-of the real knot count. there the knots_count spezifies the
-knots_count x knots_count grid.}
+\item{knots}{}
 
 \item{...}{additional arguments for \link{spT.Gibbs}}
 }

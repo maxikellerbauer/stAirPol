@@ -1,3 +1,11 @@
+#' ---
+#' title: "Simple modelling and crossvalidation"
+#' author: "Maxi Kellerbauer"
+#' date: "November 5th, 2018"
+#' ---
+#+ messages=FALSE,warning=FALSE, echo=FALSE, results='hide'
+
+
 require(stAirPol)
 require(spTimer)
 require(ggplot2)
@@ -5,49 +13,55 @@ require(data.table)
 
 
 # Read the data -----------------------------------------------------------
+#' # Read the data
+#' We load the daily data of Munich for PM2.5
 data("muc_airPol_p2")
 #' remove outliers in the data
 data <- clean_model_data(muc_airPol_p2, timesIQR = 1.5)
-# Fit the model -----------------------------------------------------------
 
-#' Now we want to fit a Gaussian Process model, and analyse the parameters and
-#' the model hisself.
-#' We use the following formula to spezify the covariables in the linear part
+# Fit the model -----------------------------------------------------------
+#' # Fit the model
+
+#' Now we want to fit a Gaussian Process model, and analyze the parameters and
+#' the model himself.
+#' We use the following formula to specify the covariables in the linear part
 #' of the model
 formula = value ~ humi + temp + rainhist + windhist +
   trafficvol + log(sensor_age)
 
-#' There are tree most used modeltypes,
+#' There are tree most used model types,
 #'     - Gaussian Process short GP
-#'     - Autoregessive Gaussian Process short AR
+#'     - Autoregressive Gaussian Process short AR
 #'     - Gaussian Predictive Process short GPP
 #' First we fit only the Gaussian Process
+#' For more model types, see ?spT.Gibbs
 model.gp.p2 <- fit_sp_model(data = data, formula = formula, model = 'GP')
 
 #' With summary we get a brief overview of the fitted parameters, and the PMCC
 #' of the model
 summary(model.gp.p2)
 #' Trace plots of the MCMC-Iterations
+#' Note: make the plot window in RStudio as big as possible
 plot(model.gp.p2)
 dev.off()
 
 #' Now we can do a deeper specification of the Model
-#' First we add our own Prioris to the model, for more details see ?spT.priors
+#' First, we add our own Prioris to the model, for more details see ?spT.priors
 priors <- spT.priors(model = "GP", inv.var.prior = Gamm(a = 2, b = 1),
                      beta.prior = Norm(0, 10^4))
 #' Covariance function for the spatial effects we want to use the exponential
-#' covariance, for more choises see ?spT.Gibbs
+#' covariance, for more choices see ?spT.Gibbs
 cov.fnc = "exponential"
 #' We change the method how the parameter for the spatial decay should be fitted,
 #' see ?spT.decay for more details
-#' We choose a Gamma(2,1) Prioridistribution with the tuningparameter 0.1,
-#' the tuningparameter should be choosen that the acceptance rate for phi is
+#' We choose a Gamma(2,1) Prior distribution with the tuning parameter 0.1,
+#' the tuning parameter should be chosen that the acceptance rate for phi is
 #' between 20%-40%.
 spatial.decay = spT.decay(distribution = Gamm(a = 2, b = 1), tuning = 0.25)
 #' If it's wanted to get some feedback during the fitting process, we can
 #' choose a number of feedback messages we want to arrive
 report = 5
-#' We are able to perfom a on the fly transormations of the target variable
+#' We are able to perform a on the fly transformations of the target variable
 scale.transform = "SQRT"
 model.gp.p2.mod <- fit_sp_model(data = data,
                             formula = formula,
@@ -62,13 +76,14 @@ summary(model.gp.p2.mod)
 
 
 # Test the model ----------------------------------------------------------
+#' # Test the model
 
-#' Now we have created two diffrent kinds of Gaussian Process Models. With a
+#' Now we have created two different kinds of Gaussian Process Models. With a
 #' crossvalidatioin we want to the them against each other.
-#' Therefore we specify a train and a test set with 75% random training sensors
+#' Therefore, we specify a train and a test set with 75% random training sensors
 training_set <- get_test_and_training_set(data, sampel_size = 0.75,
                                       random.seed = 220292)
-#' Now we are able the train the models only the the choosen training sensors
+#' Now we are able the train the models only the the chosen training sensors
 #' by adding training_set = training_set into the function
 model.gp.p2 <- fit_sp_model(data = data, formula = formula, model = 'GP',
                             training_set = training_set)
@@ -81,31 +96,34 @@ model.gp.p2.mod <- fit_sp_model(data = data,
                                 training_set = training_set,
                                 scale.transform = scale.transform,
                                 spatial.decay = spatial.decay)
-#' we are able to perform with the well known predict function predictions for
+#' we are able to perform with the well-known predict function predictions for
 #' that models, by adding the training_set, only predictions for the test
 #' sensors will be calculated.
 pred.gp.p2 <- predict(model.gp.p2, data, training_set)
 pred.gp.p2.mod <- predict(model.gp.p2.mod, data, training_set)
 
-#' To evaluate the predictive performance we use evaluate_prediction()
+#' To evaluate the predictive performance ,we use evaluate_prediction()
 evaluate_prediction(pred.gp.p2)
 evaluate_prediction(pred.gp.p2.mod)
 
 #' There are also some validation plots availible
 #' Fitted vs. predicted:
 plot(pred.gp.p2.mod)
-#' Fitted vs. predicted seperated by time:
+#' Fitted vs. predicted separated by time:
 plot(pred.gp.p2.mod, time_dimension = TRUE)
 
 
 
-# Various bayesian Models -------------------------------------------------
+# Various Bayesian Models -------------------------------------------------
+#' # Various Bayesian Models
 
-#' There are more Model besides the Gaussian Process.
-#' For example the autogressive Gaussian Process:
+#' There are more Models besides the Gaussian Process.
+#' For example, the autoregressive Gaussian Process:
 
-priors.ar <- spT.priors(model = "AR", inv.var.prior = Gamm(a = 2, b = 1),
-                        beta.prior = Norm(0, 10^4))
+priors.ar <- spT.priors(model = "AR",
+                        inv.var.prior = Gamm(a = 2, b = 1),
+                        beta.prior = Norm(0, 10^4),
+                        rho.prior=Norm(0,10^10))
 model.ar.p2 <- fit_sp_model(data = data,
                             formula = formula,
                             model = 'AR',
@@ -118,7 +136,6 @@ model.ar.p2 <- fit_sp_model(data = data,
 
 pred.ar.p2 <- predict(model.ar.p2, data, training_set)
 evaluate_prediction(pred.ar.p2)
-plot(pred.ar.p2)
 
 #' The last model is the Gaussian Predictive Process, here we have to specify
 #' two more things:
@@ -132,8 +149,7 @@ model.gpp.p2 <- fit_sp_model(data = data,
                             model = 'GPP',
                             priors = priors.gpp,
                             cov.fnc = cov.fnc,
-                            knots_count = 20,
-                            knots_method = 'random',
+                            knots_count = 4,
                             report = report,
                             training_set = training_set,
                             scale.transform = scale.transform,
@@ -141,13 +157,10 @@ model.gpp.p2 <- fit_sp_model(data = data,
 
 pred.gpp.p2 <- predict(model.gpp.p2, data, training_set)
 evaluate_prediction(pred.gpp.p2)
-plot(pred.gpp.p2)
-plot(pred.gpp.p2, time_dimension = TRUE)
-
-
 
 
 # Compair the models ------------------------------------------------------
+#' # Compair the models
 
 evaluate_prediction_table(list('pred.gp.p2' = pred.gp.p2,
                                'pred.gp.p2.mod' = pred.gp.p2.mod,

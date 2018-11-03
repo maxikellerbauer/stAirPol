@@ -2,10 +2,39 @@ require(data.table)
 require(stAirPol)
 require(ggplot2)
 
+#' Note: for that preselected specifications are 8 datasets included in the
+#' R-Package stAirPol
+#'      ______________________________________________________________________
+#'      - 'muc_airPol_p1':
+#'        A dataset of daily observations in Munich for December 2017 of PM10
+#'      - 'muc_airPol_p1_grid':
+#'        A grid for 'muc_airPol_p1'
+#'      - 'muc_airPol_p2':
+#'      ______________________________________________________________________
+#'      - 'muc_airPol_p2':
+#'        A dataset of daily observations in Munich for December 2017 of PM2.5
+#'      - 'muc_airPol_p2_grid':
+#'        A grid for 'muc_airPol_p2'
+#'      ______________________________________________________________________
+#'      - 'muc_airPol_p1_8h':
+#'        A dataset of 8h observations in Munich for December 2017 of PM10
+#'      - 'muc_airPol_p1_grid_8h':
+#'        A grid for 'muc_airPol_p1_8h'
+#'      ______________________________________________________________________
+#'      - 'muc_airPol_p2_8h':
+#'        A dataset of 8h observations in Munich for December 2017 of PM2.5
+#'      - 'muc_airPol_p2_grid_8h':
+#'        A grid for 'muc_airPol_p2_8h'
+#'      ______________________________________________________________________
+#'
+#'
+#' If that's enough for testing, please continue with:
+#' 3_simple_modelling_and_crossvalidation.R
+
 
 
 # User Input --------------------------------------------------------------
-#' Spezify the data path which contains the collected data.
+#' Specify the data path which contains the collected data.
 path = '~/stAirPol_data2'
 
 #' For which German Postcode do you want to model air pollution data?
@@ -15,20 +44,20 @@ path = '~/stAirPol_data2'
 m.plz <- c(80539)
 
 #' Now you have to decide what the gridcellsize should be used, see
-#' ?sf::st_make_grid for informations about the cellsize parameter
+#' ?sf::st_make_grid for information’s about the cellsize parameter
 m.grid_cellsize <- 0.003
 
-#' The next spezification which is needed is the timerange, please specify
+#' The next specification which is needed is the time range, please specify
 #' the start and the end date
-#' NOTE: currently are only whole months supported, so the startdate is floored
-#' and the end_date is ceiilinged.
+#' NOTE: currently are only whole months supported, so the start date is floored
+#' and the end date is ceilinged.
 start_date = "2017-12-01"
 end_date = "2017-12-31"
 
-#' The spezification which is needed is the aggreation interval and the
-#' timeshift which is apply to the data. We choose an aggregation_interval of 8
+#' The specification which is needed is the aggregation interval and the
+#' time shift which is apply to the data. We choose an aggregation interval of 8
 #' hours, for more information about the aggregration_interval units see
-#' ?lubridate::round_date. The timeshift is applied to the data.
+#' ?lubridate::round_date. The time shift is applied to the data.
 #' Run the print method on the object for more information.
 m.agg_info <- aggregation_information(timeshift = lubridate::hours(0),
                                       aggregation_interval = '24 hours')
@@ -39,15 +68,15 @@ print(m.agg_info)
 # Data gathering ----------------------------------------------------------
 m.date_pattern <- unique(substring(as.character(seq(as.Date(start_date),
                                              as.Date(end_date), 1)), 1,7))
-#' Collection the Informations about the sensors and the collected data from
-#' the sensors in the choosen area.
+#' Collection the Information’s about the sensors and the collected data from
+#' the sensors in the chosen area.
 sensors <- get_sensors(date_pattern = m.date_pattern, plz = m.plz, path = path)
 sensor_age <- get_sensor_age(path = path)
 sensor_data <- get_sensor_measured_values(sensors, m.date_pattern, path = path)
 
 # Traffic data ------------------------------------------------------------
 #' Please note, if you want to gather data for a big area, I suggest to use a
-#' fixed value for lambda, e.g. lambda = 0.1, because the optimisation of
+#' fixed value for lambda, e.g. lambda = 0.1, because the optimization of
 #' optim_lambda() will take a huge amount of computation costs.
 #' lambda.p1 <- lambda.p2 <- 0.1
 estimate_grid_size(m.plz)
