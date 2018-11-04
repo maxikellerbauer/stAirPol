@@ -67,8 +67,8 @@ model.gpp.wdays <- fit_sp_model(data = data,
                                training_set = training_set,
                                scale.transform = scale.transform,
                                spatial.decay = spatial.decay)
-pred.gpp.wdays <- predict(model.gpp, data, training_set)
-summary(model.gpp)
+pred.gpp.wdays <- predict(model.gpp.wdays, data, training_set)
+summary(pred.gpp.wdays)
 model_result_list <- list('pred.gpp.p2' = pred.gpp.p2,
                           'pred.gpp.wdays' = pred.gpp.wdays)
 evaluate_prediction_table(model_result_list)

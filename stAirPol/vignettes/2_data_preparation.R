@@ -75,6 +75,9 @@ sensor_data <- get_sensor_measured_values(sensors, m.date_pattern, path = path)
 #' fixed value for lambda, e.g. lambda = 0.1, because the optimization of
 #' optim_lambda() will take a huge amount of computation costs.
 #' lambda.p1 <- lambda.p2 <- 0.1
+#' If an optimization is applied, please check the validation plot.
+#' The local maximum should not be on the boarders, if it is please
+#' specify the lambda_range parameter.
 estimate_grid_size(m.plz)
 roads <- get_opentransportmap_data(m.plz, path = path, trafficvol_treshold = 1)
 lambda.p1 <- optim_lambda(sensor_data[['P1']], sensors[['P1']], roads = roads,
