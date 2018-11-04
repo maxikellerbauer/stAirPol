@@ -13,14 +13,14 @@ smooth_space_time_variables(sensor_data, sensors = NULL, grid, agg_info,
 
 \item{sensors}{data as returned by \link{get_sensors}}
 
-\item{grid}{a object as returnet by \link{make_grid_traffic}}
+\item{grid}{an object as returned by \link{make_grid_traffic}}
 
-\item{agg_info}{a object as returnet by \link{aggregation_information}}
+\item{agg_info}{an object as returnet by \link{aggregation_information}}
 
-\item{mc.cores}{how much cores should be used for parallelisation, default is
-one core less you maximum number of detected cores.}
+\item{mc.cores}{how much cores should be used for parallelization, default is
+one core less your maximum number of detected cores.}
 
-\item{times_IQR}{remove outliers,which are more then times_IQR * IQR away
+\item{times_IQR}{remove outliers, which are more then times_IQR * IQR away
 from the median}
 
 \item{...}{arguments passed to \link{automap::autoKrige}}

@@ -31,7 +31,7 @@ require(ggplot2)
 
 # User Input --------------------------------------------------------------
 #' Specify the data path which contains the collected data.
-path = '~/stAirPol_data2'
+path = '~/data'
 
 #' For which German Postcode do you want to model air pollution data?
 #' Use directly one Postcode or see ?get_postcodes_for_landkreis and

@@ -7,14 +7,14 @@
 optim_hist_para(model_data, data)
 }
 \arguments{
-\item{model_data}{a object as returned by \link{get_model_frame}}
+\item{model_data}{an object as returned by \link{get_model_frame}}
 
-\item{data}{a object as returned by \link{smooth_space_time_variables}}
+\item{data}{an object as returned by \link{smooth_space_time_variables}}
 }
 \value{
-the optimized parameter in a \link{data.frame}
+the optimized parameter in a \link{data. Frame}
 }
 \description{
-optimise all parameters to maximize the correlation for the two historical
+optimize all parameters to maximize the correlation for the two historical
 variables wind and rain
 }

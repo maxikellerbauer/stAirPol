@@ -9,7 +9,7 @@
 data(plz_shape)
 }
 \description{
-Shapefile for all german PLZ
+Shapefile for all German PLZ
 }
 \examples{
 data(plz_shape)

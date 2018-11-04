@@ -7,7 +7,7 @@
 plot.spAirPol.valdidation_set(set)
 }
 \arguments{
-\item{set}{a object as returned by \link{get_test_and_training_set}}
+\item{set}{an object as returned by \link{get_test_and_training_set}}
 }
 \description{
 Plot the locations of the training and test sensors

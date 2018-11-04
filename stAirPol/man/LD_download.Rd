@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_luftdaten.R
 \name{LD_download}
 \alias{LD_download}
-\title{Download csv files from archive.liftdaten.info}
+\title{Download csv files from archive.luftdaten.info}
 \usage{
 LD_download(folder, start = "2015-10-01", end = Sys.Date(),
   sensortype = "")
@@ -18,7 +18,7 @@ LD_download(folder, start = "2015-10-01", end = Sys.Date(),
 files are stored in folder/
 }
 \description{
-Download csv files from archive.liftdaten.info
+Download csv files from archive.luftdaten.info
 }
 \author{
 Volker Schmid

@@ -26,7 +26,7 @@ sql_load_sensor_measured_values <- function(sensor_id, date_pattern,
 
 #' get_sensor_measured_values
 #'
-#' @param date_pattern  character vector in the format '%Y-%m'
+#' @param date_pattern  character vector in the format YYYY_MM
 #' @param sensors object as returned from the function \link{get_sensors}
 #' @param path filepath where the informations are stored
 #'

@@ -7,7 +7,7 @@
 \method{print}{spAirPol.valdidation_set}(set)
 }
 \arguments{
-\item{set}{a object as returned by \link{get_test_and_training_set}}
+\item{set}{an object as returned by \link{get_test_and_training_set}}
 }
 \value{
 Informations about the training set

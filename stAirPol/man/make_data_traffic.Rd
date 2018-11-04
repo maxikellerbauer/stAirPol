@@ -12,15 +12,15 @@ make_data_traffic(sensors, lambda, scale = 100,
 
 \item{lambda}{smoothing parameter}
 
-\item{scale}{numericvalue to scale the traffic volumen, defauld is 100}
+\item{scale}{numeric value to scale the traffic volume, default is 100}
 
-\item{mc.cores}{how much cores should be used for parallelisation, default is
-one core less you maximum number of detected cores.}
+\item{mc.cores}{how much cores should be used for parallelization, default is
+one core less your maximum number of detected cores.}
 }
 \value{
 \link{data.table} of the sensors with a new column which contains
-informations about the traffic volumen
+informations about the traffic volume
 }
 \description{
-Caclulate for each sensor the traffic volumen data
+Calculate for each sensor the traffic volume data
 }

@@ -7,12 +7,12 @@
 plot.stAirPol.parameters(parameter)
 }
 \arguments{
-\item{parmeter}{a object as returned by \link{fit_subintervalls} with the
+\item{parameter}{an object as returned by \link{fit_subintervalls} with the
 option \code{return = 'parameters'}}
 }
 \value{
 a ggplot2 object
 }
 \description{
-Plot boxplox for each parameter.
+Plot boxplot for each parameter.
 }

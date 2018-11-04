@@ -8,15 +8,15 @@ get_opentransportmap_data(plz, path, trafficvol_treshold = 1,
   mc.cores = parallel::detectCores() - 1)
 }
 \arguments{
-\item{plz}{a vector a german postcodes for that the traffic data will be}
+\item{plz}{a vector a German postcode for that the traffic data will be}
 
 \item{path}{filepath where the informations are stored}
 
-\item{trafficvol_treshold}{A treshold, which roads should be ignored, default
+\item{trafficvol_treshold}{A threshold, which roads should be ignored, default
 is 1, due to the logarithmical transformation of the data}
 
-\item{mc.cores}{how much cores should be used for parallelisation, default is
-one core less you maximum number of detected cores.}
+\item{mc.cores}{how much cores should be used for parallelization, default is
+one core less your maximum number of detected cores.}
 }
 \value{
 a sfc object of the roads

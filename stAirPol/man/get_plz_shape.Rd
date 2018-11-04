@@ -7,11 +7,11 @@
 get_plz_shape(plz)
 }
 \arguments{
-\item{plz}{a character vector which contains all german postcodes of the
+\item{plz}{a character vector which contains all German postcodes of the
 area.}
 }
 \value{
-shapefile for that german postcodes
+shapefile for that German postcodes
 }
 \description{
 get_shape_for_plz

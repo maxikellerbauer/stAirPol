@@ -10,10 +10,10 @@ predict_split(model, new_data, sample_count = 100,
 \arguments{
 \item{model}{a spatio-temporal model as returned by \link{fit_sp_model}}
 
-\item{sample_count}{how much subsamples?, defauld is 100}
+\item{sample_count}{how much subsamples?, default is 100}
 
-\item{mc.cores}{how much cores should be used for parallelisation, default is
-one core less you maximum number of detected cores.}
+\item{mc.cores}{how much cores should be used for parallelization, default is
+one core less your maximum number of detected cores.}
 
 \item{...}{}
 

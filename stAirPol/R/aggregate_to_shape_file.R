@@ -17,8 +17,9 @@
 #' @importFrom ggsn scalebar
 #' @import ggplot2
 #'
-#' @return a ggplot object with the aggregation map
 #' @export
+#' @return a ggplot object with the aggregation map
+#'
 aggregate_to_shape_file <- function(prediction, shape, scale_bar_dist = 3,
                                     mc.cores = parallel::detectCores() - 1) {
   grid_coords <- unique(prediction[, .(lon, lat, sensor_id)])

@@ -14,7 +14,7 @@ smooth_loaction(roads, point, lambda = 0.05)
 \item{lambda}{smoothing parameter}
 }
 \value{
-numerical value of the esitimated trafficvolumne
+numerical value of the estimated trafficvolumne
 }
 \description{
 Smooth the trafficvolumne around one point

@@ -2,7 +2,7 @@
 % Please edit documentation in R/optim_lambda.R
 \name{optim_lambda}
 \alias{optim_lambda}
-\title{Optimize a lambda parameter for the trafficvolume}
+\title{Optimize a lambda parameter for the traffic volume}
 \usage{
 optim_lambda(sensor_data, sensors, roads, validation_plot = TRUE,
   lambda_range = seq(0.001, 0.02, length.out = 10),
@@ -19,13 +19,13 @@ optim_lambda(sensor_data, sensors, roads, validation_plot = TRUE,
 
 \item{lambda_range}{over which range should lambda be optimized}
 
-\item{mc.cores}{how much cores should be used for parallelisation, default is
-one core less you maximum number of detected cores.}
+\item{mc.cores}{how much cores should be used for parallelization, default is
+one core less your maximum number of detected cores.}
 }
 \value{
-the lambda which maximises the correlation between the the measured
+the lambda which maximizes the correlation between the measured
 PM values and the trafficvolumne data
 }
 \description{
-Optimize a lambda parameter for the trafficvolume
+Optimize a lambda parameter for the traffic volume
 }

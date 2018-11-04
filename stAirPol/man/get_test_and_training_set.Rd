@@ -8,15 +8,15 @@ get_test_and_training_set(sensors, sampel_size = 0.75, random.seed = NULL)
 }
 \arguments{
 \item{sensors}{modeling \link{data.table}, should contain informations about
-the sensor_id and the coordianted in the columns \code{lon} and \code{lat}}
+the sensor_id and the coordinated in the columns \code{lon} and \code{lat}}
 
-\item{sampel_size}{double beween 0 and 1, which specifies the percentage of
+\item{sampel_size}{double between 0 and 1, which specifies the percentage of
 training sensors}
 
 \item{random.seed}{for reproducibly reasons}
 }
 \description{
-Split the sensors into a traning a test set
+Split the sensors into a training a test set
 }
 \examples{
 data("mini_dataset")

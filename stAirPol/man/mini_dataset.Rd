@@ -9,7 +9,7 @@
 data(mini_dataset)
 }
 \description{
-A dataset which contains 5 days of PM10 in munich.
+A dataset which contains 5 days of PM10 in Munich.
 That dataset is only used for purposes.
 }
 \examples{

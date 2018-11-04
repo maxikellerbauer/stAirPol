@@ -7,13 +7,13 @@
 plot.stAirPol.prediction(prediction, time_dimension = FALSE)
 }
 \arguments{
-\item{prediction}{a object as returned by \link{predict.stAirPol.model}}
+\item{prediction}{an object as returned by \link{predict.stAirPol.model}}
 }
 \value{
 a \link{ggplot2} object which contains the plot
 }
 \description{
-Plot the results of a crossvalidation.
+Plot the results of a cross validation.
 }
 \examples{
 data("mini_dataset")

@@ -9,7 +9,7 @@
 data(NUTS_3)
 }
 \description{
-Maps each german PLZ to a NUTS_3 code
+Maps each German PLZ to a NUTS_3 code
 }
 \examples{
 data(NUTS_3)

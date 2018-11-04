@@ -10,12 +10,12 @@ make_grid_traffic(lambda, plz, scale = 100,
 \arguments{
 \item{lambda}{numerical smoothing parameter}
 
-\item{plz}{numerical vector of german post codes}
+\item{plz}{numerical vector of German post codes}
 
-\item{scale}{numericvalue to scale the traffic volumen, defauld is 100}
+\item{scale}{numeric value to scale the traffic volume, default is 100}
 
-\item{mc.cores}{how much cores should be used for parallelisation, default is
-one core less you maximum number of detected cores.}
+\item{mc.cores}{how much cores should be used for parallelization, default is
+one core less your maximum number of detected cores.}
 }
 \value{
 a regular grid which covered the plz areas

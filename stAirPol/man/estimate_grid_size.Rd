@@ -7,14 +7,14 @@
 estimate_grid_size(plz, grid_cellsize)
 }
 \arguments{
-\item{plz}{a character vector which contains all german postcodes of the
+\item{plz}{a character vector which contains all German postcodes of the
 area which should be used.}
 
 \item{grid_cellsize}{\link{sf::st_make_grid} for informations about the
 cellsize parameter}
 }
 \description{
-Estimate the size of the choosen grid parameters
+Estimate the size of the chosen grid parameters
 }
 \examples{
 estimate_grid_size('80993', 0.01)

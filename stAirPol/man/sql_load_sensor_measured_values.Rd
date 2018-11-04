@@ -9,7 +9,7 @@ sql_load_sensor_measured_values(sensor_id, date_pattern, variable_type, path)
 \arguments{
 \item{sensor_id}{numeric vector of sensor_ids of the luftdaten project}
 
-\item{date_pattern}{date pattern which spezifies the month in the format YYYY_MM}
+\item{date_pattern}{date pattern which specifies the month in the format YYYY_MM}
 
 \item{variable_type}{e.g. P1, P2, temperature, humidity}
 

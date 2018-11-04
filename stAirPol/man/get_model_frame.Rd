@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_model_frame.R
 \name{get_model_frame}
 \alias{get_model_frame}
-\title{Combine datasets to a modelframe}
+\title{Combine datasets to a model frame}
 \usage{
 get_model_frame(sensor_data, sensors, expand = FALSE)
 }
@@ -18,5 +18,5 @@ missing observations are filled by NA_numeric}
 a \link{data.table}
 }
 \description{
-Combine datasets to a modelframe
+Combine datasets to a model frame
 }

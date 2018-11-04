@@ -7,7 +7,7 @@
 connection(date_pattern, variable_type, path)
 }
 \arguments{
-\item{date_pattern}{date pattern which spezifies the month in the format 'YYYY_MM'}
+\item{date_pattern}{date pattern which specifies the month in the format 'YYYY_MM'}
 
 \item{variable_type}{which measured variable , P1, P2, pressure, temperature, humidity}
 
@@ -17,7 +17,7 @@ connection(date_pattern, variable_type, path)
 a RSQLite DB connection
 }
 \description{
-Builds a SQLite connection to the spezified database.
+Builds an SQLite connection to the specified database.
 }
 \examples{
 connection('2018_01', 'P1')

@@ -19,6 +19,10 @@ one core less your maximum number of detected cores.}
 }
 \value{
 a ggplot object with the aggregation map
+
+remove points which does not contain in the shapefile
+remove shapes where no gridpoints are detected
+Plot the calculated aggregation
 }
 \description{
 Aggregate the spatio-temporal prediction to the elements of a shape file

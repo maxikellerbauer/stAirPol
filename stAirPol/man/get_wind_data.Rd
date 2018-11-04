@@ -7,7 +7,7 @@
 get_wind_data(date_pattern, dwd_stat, path)
 }
 \arguments{
-\item{date_pattern}{date pattern which spezifies the month in the format 'YYYY_MM'}
+\item{date_pattern}{date pattern which specifies the month in the format 'YYYY_MM'}
 
 \item{dwd_stat}{Stations of the DWD as returned in the format of get_dwd_sensor_ids()}
 

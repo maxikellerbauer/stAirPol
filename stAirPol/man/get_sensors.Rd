@@ -9,16 +9,16 @@ get_sensors(date_pattern, plz, path)
 \arguments{
 \item{date_pattern}{character vector in the format Year-Month}
 
-\item{plz}{a character vector which contains all german postcodes of the
+\item{plz}{a character vector which contains all German postcodes of the
 area which should be used.}
 
 \item{path}{filepath where the informations are stored}
 }
 \value{
-\link{data.table} with all sensors in that timeperiod
+\link{data.table} with all sensors in that time period
 }
 \description{
-Extract all informatiions about the sensors which are located in the choosen
+Extract all information’s about the sensors which are located in the chosen
 plz.
 }
 \examples{

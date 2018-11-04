@@ -7,7 +7,7 @@
 get_dwd_sensor_ids(plz, path)
 }
 \arguments{
-\item{plz}{numeric vector of german post codes}
+\item{plz}{numeric vector of German post codes}
 
 \item{path}{filepath where the informations are stored}
 }

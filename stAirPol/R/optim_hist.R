@@ -6,7 +6,7 @@
 #'
 #' @param model_data an object as returned by \link{get_model_frame}
 #' @param data an object as returned by \link{smooth_space_time_variables}
-#' @sedilia stAirPol
+#'
 #' @return the optimized parameter in a \link{data. Frame}
 #' @export
 #'

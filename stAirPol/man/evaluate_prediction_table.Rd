@@ -14,5 +14,5 @@ evaluate_prediction_table(list)
 a data.table
 }
 \description{
-Formats a table of diffrent prediction data.frames
+Formats a table of different prediction data.frames
 }

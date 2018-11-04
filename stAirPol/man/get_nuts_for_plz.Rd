@@ -7,7 +7,7 @@
 get_nuts_for_plz(plz)
 }
 \arguments{
-\item{plz}{numeric vector of german postcodes}
+\item{plz}{numeric vector of German postcodes}
 }
 \value{
 character vectors of unique NUTS_3

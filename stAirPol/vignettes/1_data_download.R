@@ -4,7 +4,7 @@ require(data.table)
 
 #' Here we specify the folder where all data should be saved
 #' Also, the time range is specified here
-path = '~/stAirPol_data'
+path = '~/data'
 start_date = "2017-12-01"
 end_date = "2017-12-31"
 

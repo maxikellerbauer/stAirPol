@@ -9,7 +9,7 @@ get_sensor_age(path, units = "weeks")
 \arguments{
 \item{path}{filepath where the informations are stored}
 
-\item{units}{in which units should the age caculated}
+\item{units}{in which units should the age calculated}
 }
 \value{
 a data.table which contains the age of a sensor in months and the
