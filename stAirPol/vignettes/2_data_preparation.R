@@ -18,13 +18,9 @@ require(ggplot2)
 #'      ______________________________________________________________________
 #'      - 'muc_airPol_p1_8h':
 #'        A dataset of 8h observations in Munich for December 2017 of PM10
-#'      - 'muc_airPol_p1_grid_8h':
-#'        A grid for 'muc_airPol_p1_8h'
 #'      ______________________________________________________________________
 #'      - 'muc_airPol_p2_8h':
 #'        A dataset of 8h observations in Munich for December 2017 of PM2.5
-#'      - 'muc_airPol_p2_grid_8h':
-#'        A grid for 'muc_airPol_p2_8h'
 #'      ______________________________________________________________________
 #'
 #'
@@ -45,7 +41,7 @@ m.plz <- c(80539)
 
 #' Now you have to decide what the gridcellsize should be used, see
 #' ?sf::st_make_grid for information’s about the cellsize parameter
-m.grid_cellsize <- 0.003
+m.grid_cellsize <- 0.005
 
 #' The next specification which is needed is the time range, please specify
 #' the start and the end date

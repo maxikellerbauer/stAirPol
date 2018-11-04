@@ -1,6 +1,6 @@
 #' Download Open Transport Map Data
 #'
-#' That functions downloads all informations about traffic volumen in Germany.
+#' That functions downloads all informations about traffic volume in Germany.
 #' See \url{http://opentransportmap.info/} for more informations.
 #' @param path filepath where the informations should be stored
 #'

@@ -2,13 +2,13 @@
 #'
 #' @param sensors data as returned by \link{get_sensors}
 #' @param lambda smoothing parameter
-#' @param scale numericvalue to scale the traffic volumen, defauld is 100
-#' @param mc.cores how much cores should be used for parallelisation, default is
-#' one core less you maximum number of detected cores.
+#' @param scale numeric value to scale the traffic volume, default is 100
+#' @param mc.cores how much cores should be used for parallelization, default is
+#' one core less your maximum number of detected cores.
 #'
-#' @description Caclulate for each sensor the traffic volumen data
+#' @description Calculate for each sensor the traffic volume data
 #' @return \link{data.table} of the sensors with a new column which contains
-#' informations about the traffic volumen
+#' informations about the traffic volume
 #'
 #' @importFrom pbmcapply pbmclapply
 #'

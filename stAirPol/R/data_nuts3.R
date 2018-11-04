@@ -1,6 +1,6 @@
 #' NUTS_3 to PLZ Mapping
 #'
-#' Maps each german PLZ to a NUTS_3 code
+#' Maps each German PLZ to a NUTS_3 code
 #'
 #' @docType data
 #'

@@ -1,6 +1,6 @@
 #' evaluate_prediction_table
 #'
-#' Formats a table of diffrent prediction data.frames
+#' Formats a table of different prediction data.frames
 #'
 #' @param list a named list with elements of objects as returned by
 #' \link{predict.stAirPol.model}

@@ -1,10 +1,10 @@
 #' make_grid
 #'
 #' @param lambda numerical smoothing parameter
-#' @param plz numerical vector of german post codes
-#' @param scale numericvalue to scale the traffic volumen, defauld is 100
-#' @param mc.cores how much cores should be used for parallelisation, default is
-#' one core less you maximum number of detected cores.
+#' @param plz numerical vector of German post codes
+#' @param scale numeric value to scale the traffic volume, default is 100
+#' @param mc.cores how much cores should be used for parallelization, default is
+#' one core less your maximum number of detected cores.
 #'
 #' @return a regular grid which covered the plz areas
 #' @export
@@ -40,9 +40,9 @@ make_grid_traffic <- function(lambda, plz, scale = 100,
 
 #' estimate_grid_size
 #'
-#' Estimate the size of the choosen grid parameters
+#' Estimate the size of the chosen grid parameters
 #'
-#' @param plz a character vector which contains all german postcodes of the
+#' @param plz a character vector which contains all German postcodes of the
 #' area which should be used.
 #' @param grid_cellsize  \link{sf::st_make_grid} for informations about the
 #' cellsize parameter

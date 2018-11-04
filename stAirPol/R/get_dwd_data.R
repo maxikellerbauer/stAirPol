@@ -3,7 +3,7 @@
 #'
 #' read and transform the downloaded DWD data
 #'
-#' @param date_pattern date pattern which spezifies the month in the format 'YYYY_MM'
+#' @param date_pattern date pattern which specifies the month in the format 'YYYY_MM'
 #' @param dwd_stat Stations of the DWD as returned in the format of get_dwd_sensor_ids()
 #' @param path filepath where the informations are stored
 #'
@@ -37,7 +37,7 @@ get_wind_data <- function(date_pattern, dwd_stat, path) {
 #'
 #' read and transform the downloaded DWD data
 #'
-#' @param date_pattern date pattern which spezifies the month in the format 'YYYY_MM'
+#' @param date_pattern date pattern which specifies the month in the format 'YYYY_MM'
 #' @param dwd_stat Stations of the DWD as returned in the format of get_dwd_sensor_ids()
 #' @param path filepath where the informations are stored
 #'

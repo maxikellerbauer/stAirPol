@@ -1,10 +1,10 @@
 #' get_test_and_training_set
 #'
-#' Split the sensors into a traning a test set
+#' Split the sensors into a training a test set
 #'
 #' @param sensors modeling \link{data.table}, should contain informations about
-#' the sensor_id and the coordianted in the columns \code{lon} and \code{lat}
-#' @param sampel_size double beween 0 and 1, which specifies the percentage of
+#' the sensor_id and the coordinated in the columns \code{lon} and \code{lat}
+#' @param sampel_size double between 0 and 1, which specifies the percentage of
 #' training sensors
 #' @param random.seed for reproducibly reasons
 #'
@@ -26,7 +26,7 @@ get_test_and_training_set <- function(sensors, sampel_size = 0.75,
 
 #' print.spAirPol.valdidation_set
 #'
-#' @param set a object as returned by \link{get_test_and_training_set}
+#' @param set an object as returned by \link{get_test_and_training_set}
 #'
 #' @return Informations about the training set
 #' @export
@@ -47,7 +47,7 @@ print.spAirPol.valdidation_set <- function(set) {
 #'
 #' Plot the locations of the training and test sensors
 #'
-#' @param set a object as returned by \link{get_test_and_training_set}
+#' @param set an object as returned by \link{get_test_and_training_set}
 #'
 #' @export
 #'

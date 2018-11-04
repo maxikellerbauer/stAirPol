@@ -2,7 +2,7 @@
 #'
 #' Map plz to NUTS_3
 #'
-#' @param plz numeric vector of german postcodes
+#' @param plz numeric vector of German postcodes
 #'
 #' @return character vectors of unique NUTS_3
 #' @export

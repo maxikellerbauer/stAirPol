@@ -1,7 +1,7 @@
 #' muc_airPol_p2
 #'
 #' A dataset which contains observations of PM2.5 and a lot of covariables in
-#' munich December 2017.
+#' Munich December 2017.
 #'
 #'
 #' @docType data

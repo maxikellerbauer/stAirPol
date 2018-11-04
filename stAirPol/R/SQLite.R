@@ -1,8 +1,8 @@
 #' SQLite connection
 #'
-#' Builds a SQLite connection to the spezified database.
+#' Builds an SQLite connection to the specified database.
 #'
-#' @param date_pattern date pattern which spezifies the month in the format 'YYYY_MM'
+#' @param date_pattern date pattern which specifies the month in the format 'YYYY_MM'
 #' @param variable_type which measured variable , P1, P2, pressure, temperature, humidity
 #' @param path filepath where the informations are stored
 #'

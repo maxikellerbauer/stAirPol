@@ -4,9 +4,9 @@
 #'
 #' @param model a spatio-temporal model as returned by \link{fit_sp_model}
 #' @param newdata a dataset with informations of the covariable
-#' @param sample_count how much subsamples?, defauld is 100
-#' @param mc.cores how much cores should be used for parallelisation, default is
-#' one core less you maximum number of detected cores.
+#' @param sample_count how much subsamples?, default is 100
+#' @param mc.cores how much cores should be used for parallelization, default is
+#' one core less your maximum number of detected cores.
 #' @param ...
 #'
 #' @return the newdata with added columns of the prediction calculations

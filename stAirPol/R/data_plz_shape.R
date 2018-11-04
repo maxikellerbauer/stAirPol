@@ -1,6 +1,6 @@
 #' PLZ shape file
 #'
-#' Shapefile for all german PLZ
+#' Shapefile for all German PLZ
 #'
 #' @docType data
 #'

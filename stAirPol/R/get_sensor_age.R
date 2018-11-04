@@ -1,12 +1,9 @@
-
-
-
 #' get_sensor_age
 #'
 #' Informations about the age of a sensor in weeks
 #'
 #' @param path filepath where the informations are stored
-#' @param units in which units should the age caculated
+#' @param units in which units should the age calculated
 #'
 #' @return a data.table which contains the age of a sensor in months and the
 #' sensor_id

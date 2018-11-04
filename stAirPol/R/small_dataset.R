@@ -1,6 +1,6 @@
 #' mini_dataset
 #'
-#' A dataset which contains 5 days of PM10 in munich.
+#' A dataset which contains 5 days of PM10 in Munich.
 #' That dataset is only used for purposes.
 #'
 #'

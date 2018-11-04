@@ -1,11 +1,11 @@
 #' get_opentransportmap_data
 #'
-#' @param trafficvol_treshold A treshold, which roads should be ignored, default
+#' @param trafficvol_treshold A threshold, which roads should be ignored, default
 #' is 1, due to the logarithmical transformation of the data
-#' @param plz a vector a german postcodes for that the traffic data will be
+#' @param plz a vector a German postcode for that the traffic data will be
 #' @param path filepath where the informations are stored
-#' @param mc.cores how much cores should be used for parallelisation, default is
-#' one core less you maximum number of detected cores.
+#' @param mc.cores how much cores should be used for parallelization, default is
+#' one core less your maximum number of detected cores.
 #'
 #' @return a sfc object of the roads
 #' @export

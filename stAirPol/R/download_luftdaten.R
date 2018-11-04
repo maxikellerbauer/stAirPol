@@ -160,7 +160,7 @@ LD_sql<-function(db, end = Sys.Date()-1, source="/media/schmid/local/data/luftda
 
 
 
-#' Download csv files from archive.liftdaten.info
+#' Download csv files from archive.luftdaten.info
 #'
 #' @param folder folder to store csv
 #' @param start start date, e.g. "2015-10-01"

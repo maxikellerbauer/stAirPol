@@ -1,9 +1,9 @@
 #' get_shape_for_plz
 #'
-#' @param plz a character vector which contains all german postcodes of the
+#' @param plz a character vector which contains all German postcodes of the
 #' area.
 #'
-#' @return shapefile for that german postcodes
+#' @return shapefile for that German postcodes
 #' @export
 #'
 #' @examples

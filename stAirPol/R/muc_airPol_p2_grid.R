@@ -1,7 +1,7 @@
 #' muc_airPol_p2_grid
 #'
 #' A dataset which contains a grid with covariables in
-#' munich December 2017 for predictions of PM2.5.
+#' Munich December 2017 for predictions of PM2.5.
 #'
 #'
 #' @docType data

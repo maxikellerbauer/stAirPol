@@ -1,13 +1,13 @@
 
 #' optim_hist_para
 #'
-#' optimise all parameters to maximize the correlation for the two historical
+#' optimize all parameters to maximize the correlation for the two historical
 #' variables wind and rain
 #'
-#' @param model_data a object as returned by \link{get_model_frame}
-#' @param data a object as returned by \link{smooth_space_time_variables}
-#' @useDynLib stAirPol
-#' @return the optimized parameter in a \link{data.frame}
+#' @param model_data an object as returned by \link{get_model_frame}
+#' @param data an object as returned by \link{smooth_space_time_variables}
+#' @sedilia stAirPol
+#' @return the optimized parameter in a \link{data. Frame}
 #' @export
 #'
 #' @importFrom dplyr left_join

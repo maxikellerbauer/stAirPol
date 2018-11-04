@@ -1,14 +1,14 @@
 #' get_sensors
 #'
-#' Extract all informatiions about the sensors which are located in the choosen
+#' Extract all information’s about the sensors which are located in the chosen
 #' plz.
 #'
 #' @param date_pattern character vector in the format Year-Month
-#' @param plz a character vector which contains all german postcodes of the
+#' @param plz a character vector which contains all German postcodes of the
 #' area which should be used.
 #' @param path filepath where the informations are stored
 #'
-#' @return \link{data.table} with all sensors in that timeperiod
+#' @return \link{data.table} with all sensors in that time period
 #' @export
 #' @import data.table
 #' @import sf

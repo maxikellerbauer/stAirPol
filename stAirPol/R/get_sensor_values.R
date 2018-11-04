@@ -4,14 +4,13 @@
 #' read all measured values for one date_pattern variable_type combination
 #'
 #' @param sensor_id numeric vector of sensor_ids of the luftdaten project
-#' @param date_pattern date pattern which spezifies the month in the format YYYY_MM
+#' @param date_pattern date pattern which specifies the month in the format YYYY_MM
 #' @param path filepath where the informations are stored
 #' @param variable_type e.g. P1, P2, temperature, humidity
 #'
 #' @export
 #' @importFrom lubridate ymd_hms
 #' @return all measured values
-#'
 sql_load_sensor_measured_values <- function(sensor_id, date_pattern,
                                             variable_type, path) {
   con <- connection(date_pattern, variable_type, path = path)

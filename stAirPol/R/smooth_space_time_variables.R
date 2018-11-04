@@ -1,4 +1,3 @@
-
 #' Spatial Interpolation with Kriging
 #'
 #' The functions takes the delivered informations of sensors and sensor_data
@@ -8,12 +7,12 @@
 #' @param sensor_data data as returned by \link{get_sensor_measured_values}
 #' @param sensors data as returned by \link{get_sensors}
 #' @inheritParams clean_model_data
-#' @param grid a object as returnet by \link{make_grid_traffic}
-#' @param agg_info a object as returnet by \link{aggregation_information}
-#' @param times_IQR remove outliers,which are more then times_IQR * IQR away
+#' @param grid an object as returned by \link{make_grid_traffic}
+#' @param agg_info an object as returnet by \link{aggregation_information}
+#' @param times_IQR remove outliers, which are more then times_IQR * IQR away
 #' from the median
-#' @param mc.cores how much cores should be used for parallelisation, default is
-#' one core less you maximum number of detected cores.
+#' @param mc.cores how much cores should be used for parallelization, default is
+#' one core less your maximum number of detected cores.
 #' @param ... arguments passed to \link{automap::autoKrige}
 #'
 #' @return the interpolated dataset around the delivered grid

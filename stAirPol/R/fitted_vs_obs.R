@@ -1,8 +1,8 @@
 #' plot.stAirPol.prediction
 #'
-#' Plot the results of a crossvalidation.
+#' Plot the results of a cross validation.
 #'
-#' @param prediction a object as returned by \link{predict.stAirPol.model}
+#' @param prediction an object as returned by \link{predict.stAirPol.model}
 #'
 #' @return a \link{ggplot2} object which contains the plot
 #' @export
@@ -19,6 +19,7 @@
 #' pred.gp <- predict(model.gp, mini_dataset, training_set)
 #' plot(pred.gp)
 #' plot(pred.gp, time_dimension = TRUE)
+
 plot.stAirPol.prediction <- function(prediction, time_dimension = FALSE) {
   if (!time_dimension) {
     g <- ggplot(data = prediction, aes(x = value, y = prediction)) +

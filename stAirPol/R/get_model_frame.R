@@ -1,4 +1,4 @@
-#' Combine datasets to a modelframe
+#' Combine datasets to a model frame
 #'
 #' @param sensor_data data as returned by \link{get_sensor_measured_values}
 #' @param sensors data as returned by \link{get_sensors}

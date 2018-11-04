@@ -1,6 +1,6 @@
 #' get_dwd_sensor_ids
 #'
-#' @param plz numeric vector of german post codes
+#' @param plz numeric vector of German post codes
 #' @param path filepath where the informations are stored
 #'
 #' @return all DWD stations inside the plz areas
