@@ -14,7 +14,8 @@
 #' @param nItr Number of MCMC iterations. Default value is 5000.
 #' @param nBurn Number of burn-in samples. This number of samples will be
 #' discarded before making any inference. Default value is 1000.
-#' @param return default is 'prediction'
+#' @param return default is 'prediction', otherwise the parametervalues of
+#' each submodel is returned
 #' @param tol Minimum separation distance between any two locations out of
 #' those specified by coords, knots.coords and pred.coords. The default is
 #' 0.005. The programm will exit if the minimum distance is less than the
@@ -50,8 +51,9 @@
 #' prediction.gp <- fit_subintervalls(data = mini_dataset, formula = formula,
 #'                             model = 'GP', training_set = training_set,
 #'                             unit = '1 day')
-fit_subintervalls <- function(data, grid = NULL, training_set = NULL, unit = '1 week',
-                              nItr = 5000, nBurn = 1000, return = 'prediction', tol = 0.01,
+fit_subintervalls <- function(data, grid = NULL, training_set = NULL,
+                              unit = '1 week', nItr = 5000, nBurn = 1000,
+                              return = 'prediction', tol = 0.01,
                               retry_count = 5, retry_reason_mean = 500,
                               retry_reason_rmse = 2000,
                               mc.cores = parallel::detectCores() - 1, ...) {
@@ -64,6 +66,7 @@ fit_subintervalls <- function(data, grid = NULL, training_set = NULL, unit = '1 
   } else {
     stop("grid or training_set must be not NULL")
   }
+  #' split the data to subintervalls and perform a modelling on each intervall
   data.fit_list <-
     split(data.fit,
           lubridate::floor_date(data.fit$timestamp, unit = unit))
@@ -72,17 +75,17 @@ fit_subintervalls <- function(data, grid = NULL, training_set = NULL, unit = '1 
       data.predict,
       lubridate::floor_date(data.predict$timestamp, unit = unit)
     )
+  #' parallel computation for speeding up the modelfitting
   pred_list <- pbmcapply::pbmclapply(seq_along(data.fit_list), function(i) {
     attempt <- 1
     #' retry model fitting and prediction in cause of a strange behavior
-    #' sometimes
+    #' sometimes (MCMC)
     while (attempt <= retry_count) {
       attempt <- attempt + 1
       t <- try({
         #' remove sensors which are always NA
         s <- data.fit_list[[i]][!is.na(value), .N, by = sensor_id][N > 0]
         d <- data.fit_list[[i]][sensor_id %in% s$sensor_id]
-        d <- data.fit_list[[i]]
         model <- fit_sp_model(data = d, training_set = NULL, tol = tol,
                            nItr = nItr, nBurn = nBurn, ...)
         if (return == 'prediction') {

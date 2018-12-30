@@ -15,7 +15,8 @@ predict_split(model, new_data, sample_count = 100,
 \item{mc.cores}{how much cores should be used for parallelization, default is
 one core less your maximum number of detected cores.}
 
-\item{...}{}
+\item{...}{additional parameters which are passed to
+\link{predict.stAirPol.model}}
 
 \item{newdata}{a dataset with informations of the covariable}
 }

@@ -28,7 +28,8 @@ for more informations}
 \item{nBurn}{Number of burn-in samples. This number of samples will be
 discarded before making any inference. Default value is 1000.}
 
-\item{return}{default is 'prediction'}
+\item{return}{default is 'prediction', otherwise the parametervalues of
+each submodel is returned}
 
 \item{tol}{Minimum separation distance between any two locations out of
 those specified by coords, knots.coords and pred.coords. The default is

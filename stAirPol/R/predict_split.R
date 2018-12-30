@@ -7,7 +7,8 @@
 #' @param sample_count how much subsamples?, default is 100
 #' @param mc.cores how much cores should be used for parallelization, default is
 #' one core less your maximum number of detected cores.
-#' @param ...
+#' @param ... additional parameters which are passed to
+#' \link{predict.stAirPol.model}
 #'
 #' @return the newdata with added columns of the prediction calculations
 #' @export
