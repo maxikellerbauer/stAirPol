@@ -28,7 +28,7 @@
 #' pred.gp <- predict_split(model.gp, mini_dataset, training_set)
 predict_split <- function(model, new_data, sample_count = 100,
                           mc.cores = parallel::detectCores() - 1, ...) {
-  new_data.list <- split(new_data, new_data$sensor_id %% 100)
+  new_data.list <- split(new_data, new_data$sensor_id %% sample_count)
   prediction.list <- pbmcapply::pbmclapply(1:length(new_data.list), function(i) {
     predict(model, new_data.list[[i]])
   }, mc.cores = mc.cores)
