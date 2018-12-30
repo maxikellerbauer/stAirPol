@@ -71,3 +71,7 @@ retry model fitting and prediction in cause of a strange behavior
 sometimes
 remove sensors which are always NA
 }
+\seealso{
+\link{fit_subintervalls}, \link{predict.stAirPol.model},
+\link{predict_split} \link{fit_model}
+}

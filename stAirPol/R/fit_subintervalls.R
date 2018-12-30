@@ -33,6 +33,9 @@
 #' @importFrom lubridate floor_date
 #' @importFrom pbmcapply pbmclapply
 #'
+#' @seealso \link{fit_subintervalls}, \link{predict.stAirPol.model},
+#' \link{predict_split} \link{fit_model}
+#'
 #' @return the grid with added columns of the prediction calculations, or the
 #' crossvaldiation predictions
 #' @export

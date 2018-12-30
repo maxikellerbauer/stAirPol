@@ -36,3 +36,7 @@ model.gp <- fit_sp_model(data = mini_dataset, formula = formula,
                          model = 'GP', training_set = training_set)
 pred.gp <- predict_split(model.gp, mini_dataset, training_set)
 }
+\seealso{
+\link{fit_subintervalls}, \link{predict.stAirPol.model},
+\link{predict_split} \link{fit_model}
+}

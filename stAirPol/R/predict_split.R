@@ -12,6 +12,10 @@
 #' @return the newdata with added columns of the prediction calculations
 #' @export
 #' @importFrom pbmcapply pbmclapply
+#'
+#' @seealso \link{fit_subintervalls}, \link{predict.stAirPol.model},
+#' \link{predict_split} \link{fit_model}
+#'
 #' @examples
 #' data("mini_dataset")
 #' mini_dataset <- clean_model_data(mini_dataset)
