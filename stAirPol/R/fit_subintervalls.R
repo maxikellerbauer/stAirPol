@@ -14,8 +14,8 @@
 #' @param nItr Number of MCMC iterations. Default value is 5000.
 #' @param nBurn Number of burn-in samples. This number of samples will be
 #' discarded before making any inference. Default value is 1000.
-#' @param return default is 'prediction', otherwise the parametervalues of
-#' each submodel is returned
+#' @param return default is 'prediction', otherwise use 'parameters' to return
+#' the parametervalues of each submodel in a data.frame.
 #' @param tol Minimum separation distance between any two locations out of
 #' those specified by coords, knots.coords and pred.coords. The default is
 #' 0.005. The programm will exit if the minimum distance is less than the
@@ -89,7 +89,8 @@ fit_subintervalls <- function(data, grid = NULL, training_set = NULL,
         model <- fit_sp_model(data = d, training_set = NULL, tol = tol,
                            nItr = nItr, nBurn = nBurn, ...)
         if (return == 'prediction') {
-          p <- rbindlist(lapply(unique(data.predict_list[[i]]$sensor_id), function(x) {
+          p <- rbindlist(lapply(unique(data.predict_list[[i]]$sensor_id),
+                                function(x) {
             predict(model, newdata  = data.predict_list[[i]][sensor_id %in% x],
                     training_set = NULL, ...)}))
           if (RMSE(p$value, p$prediction) < retry_reason_rmse) {
