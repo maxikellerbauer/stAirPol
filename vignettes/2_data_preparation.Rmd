@@ -1,0 +1,153 @@
+---
+title: "Data preparation"
+author: "Maxi Kellerbauer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data preparation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r }
+require(data.table)
+require(stAirPol)
+require(ggplot2)
+```
+
+Note: for that preselected specifications are 8 datasets included in the
+R-Package stAirPol
+     ______________________________________________________________________
+     - 'muc_airPol_p1':
+       A dataset of daily observations in Munich for December 2017 of PM10
+     - 'muc_airPol_p1_grid':
+       A grid for 'muc_airPol_p1'
+     - 'muc_airPol_p2':
+     ______________________________________________________________________
+     - 'muc_airPol_p2':
+       A dataset of daily observations in Munich for December 2017 of PM2.5
+     - 'muc_airPol_p2_grid':
+       A grid for 'muc_airPol_p2'
+     ______________________________________________________________________
+     - 'muc_airPol_p1_8h':
+       A dataset of 8h observations in Munich for December 2017 of PM10
+     ______________________________________________________________________
+     - 'muc_airPol_p2_8h':
+       A dataset of 8h observations in Munich for December 2017 of PM2.5
+     ______________________________________________________________________
+
+
+If that's enough for testing, please continue with:
+3_simple_modelling_and_crossvalidation.R
+
+
+Specify the data path which contains the collected data.
+
+```{r eval=FALSE}
+path = '~/data'
+```
+
+For which German Postcode do you want to model air pollution data?
+Use directly one Postcode or see ?get_postcodes_for_landkreis and
+?get_postcodes_for_bundesland
+We will take Munich for that example
+
+```{r eval=FALSE}
+m.plz <- c(80539)
+```
+
+Now you have to decide what the gridcellsize should be used, see
+?sf::st_make_grid for information’s about the cellsize parameter
+
+```{r eval=FALSE}
+m.grid_cellsize <- 0.005
+```
+
+The next specification which is needed is the time range, please specify
+the start and the end date
+NOTE: currently are only whole months supported, so the start date is floored
+and the end date is ceilinged.
+
+```{r eval=FALSE}
+start_date = "2017-12-01"
+end_date = "2017-12-31"
+```
+
+The specification which is needed is the aggregation interval and the
+time shift which is apply to the data. We choose an aggregation interval of 8
+hours, for more information about the aggregration_interval units see
+?lubridate::round_date. The time shift is applied to the data.
+Run the print method on the object for more information.
+
+```{r eval=FALSE}
+m.agg_info <- aggregation_information(timeshift = lubridate::hours(0),
+                                      aggregation_interval = '24 hours')
+print(m.agg_info)
+
+
+
+# Data gathering ----------------------------------------------------------
+m.date_pattern <- unique(substring(as.character(seq(as.Date(start_date),
+                                             as.Date(end_date), 1)), 1,7))
+```
+
+Collection the Information’s about the sensors and the collected data from
+the sensors in the chosen area.
+
+```{r eval=FALSE}
+# Traffic data ------------------------------------------------------------
+sensors <- get_sensors(date_pattern = m.date_pattern, plz = m.plz, path = path)
+sensor_age <- get_sensor_age(path = path)
+sensor_data <- get_sensor_measured_values(sensors, m.date_pattern, path = path)
+
+```
+
+Please note, if you want to gather data for a big area, I suggest to use a
+fixed value for lambda, e.g. lambda = 0.1, because the optimization of
+optim_lambda() will take a huge amount of computation costs.
+lambda.p1 <- lambda.p2 <- 0.1
+If an optimization is applied, please check the validation plot.
+The local maximum should not be on the boarders, if it is please
+specify the lambda_range parameter.
+
+```{r eval=FALSE}
+estimate_grid_size(m.plz)
+roads <- get_opentransportmap_data(m.plz, path = path, trafficvol_treshold = 1)
+lambda.p1 <- optim_lambda(sensor_data[['P1']], sensors[['P1']], roads = roads,
+                          validation_plot = TRUE)
+lambda.p2 <- optim_lambda(sensor_data[['P2']], sensors[['P2']], roads = roads,
+                          validation_plot = TRUE)
+grid.traffic.p1 <- make_grid_traffic(lambda.p1, m.plz)
+grid.traffic.p2 <- make_grid_traffic(lambda.p2, m.plz)
+data.traffic.p1 <- make_data_traffic(sensors = sensors[['P1']], lambda = lambda.p1)
+data.traffic.p2 <- make_data_traffic(sensors = sensors[['P2']], lambda = lambda.p2)
+
+# Space Time data ---------------------------------------------------------
+calculate_space_time_datasets()
+
+# Time Variables ----------------------------------------------------------
+calculate_time_datasets()
+
+# Rename datasets ---------------------------------------------------------
+rename_datasets()
+
+# Combine all calculated datasets -----------------------------------------
+combine_datasets()
+
+
+# Save RDS files ----------------------------------------------------------
+saveRDS(data.final.p1, file = paste0(path, '/p1_model_data_',m.grid_cellsize, '.rds'))
+saveRDS(grid.final.p1, file = paste0(path, '/p1_grid_data_',m.grid_cellsize, '.rds'))
+saveRDS(data.final.p2, file = paste0(path, '/p2_model_data_',m.grid_cellsize, '.rds'))
+saveRDS(grid.final.p2, file = paste0(path, '/p2_grid_data_',m.grid_cellsize, '.rds'))
+```
+
+

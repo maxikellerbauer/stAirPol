@@ -1,28 +1,56 @@
-## ----setup, include = FALSE----------------------------------------------
+---
+title: "Advanced Modelling"
+author: "Maxi Kellerbauer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced Modelling}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  fig.width = 10,
+  fig.width = 8,
   fig.height = 6,
   comment = "#>"
 )
+```
 
-## ----messages=FALSE,warning=FALSE, echo=FALSE, results='hide'------------
+
+```{r messages=FALSE,warning=FALSE, echo=FALSE, results='hide'}
 require(stAirPol)
 require(spTimer)
 require(data.table)
 require(ggplot2)
+```
 
-## ------------------------------------------------------------------------
+# Read the data
+We load the daily data of Munich for PM2.5
+
+```{r }
 data("muc_airPol_p2")
+```
 
-## ------------------------------------------------------------------------
+remove outliers in the data
+
+```{r }
 data <- clean_model_data(muc_airPol_p2, timesIQR = 1.5)
+```
 
-## ------------------------------------------------------------------------
+We specify a trainings set for crossvalidation
+
+```{r }
 training_set <- get_test_and_training_set(data, sampel_size = 0.75,
                                           random.seed = 220292)
+```
 
-## ------------------------------------------------------------------------
+We take the GPP model of 3_simple_modelling_and_crossvalidation.R
+as base model, and want try to beat the predictive performance.
+For speeding up the computation we only use the GPP model.
+
+```{r }
 spatial.decay = spT.decay(distribution = Gamm(a = 2, b = 1), tuning = 0.25)
 scale.transform = "SQRT"
 cov.fnc = "exponential"
@@ -44,8 +72,13 @@ model.gpp.p2 <- fit_sp_model(data = data,
 pred.gpp.p2 <- predict(model.gpp.p2, data, training_set)
 evaluate_prediction(pred.gpp.p2)
 
+```
 
-## ------------------------------------------------------------------------
+# Manipulate the covariables and the fitting range
+First we try to manipulate the Covariables. there are a lot of different ways.
+We will add individual Intercept for each weekday
+
+```{r }
 formula.wdays = value ~ humi + temp + rainhist + windhist +
   trafficvol + log(sensor_age) + stAirPol::weekday(timestamp) - 1
 model.gpp.wdays <- fit_sp_model(data = data,
@@ -63,8 +96,17 @@ summary(pred.gpp.wdays)
 model_result_list <- list('pred.gpp.p2' = pred.gpp.p2,
                           'pred.gpp.wdays' = pred.gpp.wdays)
 evaluate_prediction_table(model_result_list)
+```
 
-## ------------------------------------------------------------------------
+Now we want to train a single GPP model for each week.
+Therefore, we use the fit_subintervalls() function.
+The fit_subintervalls() functions splits the data set into the chosen
+unit, here for example 1 week.
+After splitting, it performs the model fitting and predictions to every
+single week and combine the results to the known format like the predict()
+function.
+
+```{r }
 formula = value ~ humi + temp + rainhist + windhist +
   trafficvol + log(sensor_age)
 pred.gpp.1week <- fit_subintervalls(data = data,
@@ -79,8 +121,11 @@ pred.gpp.1week <- fit_subintervalls(data = data,
                           spatial.decay = spatial.decay)
 model_result_list[['pred.gpp.1week']] <- pred.gpp.1week
 evaluate_prediction_table(model_result_list)
+```
 
-## ------------------------------------------------------------------------
+we are able to train every subintervall we want, here for example 3 days
+
+```{r }
 set.seed(2202)
 pred.gpp.3days <- fit_subintervalls(data = data,
                           formula = formula,
@@ -94,8 +139,12 @@ pred.gpp.3days <- fit_subintervalls(data = data,
                           spatial.decay = spatial.decay)
 model_result_list[['pred.gpp.3days']] <- pred.gpp.3days
 evaluate_prediction_table(model_result_list)
+```
 
-## ------------------------------------------------------------------------
+# Initial values for the models
+We can specify initial values for the modelling
+
+```{r }
 init <- spT.initials(model = 'GPP', sig2eps = 0.5, sig2eta = 0.5, rho = 0.01,
              beta = rep(0, 7), phi = 0.5)
 model.gpp.p2 <- fit_sp_model(data = data,
@@ -110,8 +159,13 @@ model.gpp.p2 <- fit_sp_model(data = data,
                              spatial.decay = spatial.decay)
 pred.gpp.p2 <- predict(model.gpp.p2, data, training_set)
 evaluate_prediction(pred.gpp.p2)
+```
 
-## ------------------------------------------------------------------------
+# Iterations of the MCMC-Runs
+We are also able to set the number of Iterations and the Burnin
+Defauld are 5000 Iterations and a Burnin of 1000.
+
+```{r }
 model.gpp.p2 <- fit_sp_model(data = data,
                              formula = formula,
                              model = 'GPP',
@@ -125,14 +179,24 @@ model.gpp.p2 <- fit_sp_model(data = data,
                              spatial.decay = spatial.decay)
 pred.gpp.p2 <- predict(model.gpp.p2, data, training_set)
 evaluate_prediction(pred.gpp.p2)
+```
 
-## ------------------------------------------------------------------------
+# Modelling intraday data
+We load the intraday data of Munich for PM2.5 in 8h intervalls
+
+```{r }
 data("muc_airPol_p2_8h")
+```
 
-## ------------------------------------------------------------------------
+remove outliers in the data
+
+```{r }
 data <- clean_model_data(muc_airPol_p2_8h, timesIQR = 1.5)
+```
 
-## ------------------------------------------------------------------------
+We add intercepts for the weekday and the hour
+
+```{r }
 formula = value ~ humi + temp + rainhist + windhist +
   trafficvol + log(sensor_age) + stAirPol::weekday(timestamp) +
   stAirPol::hour(timestamp)- 1
@@ -149,14 +213,26 @@ model.gpp <- fit_sp_model(data = data,
 
 pred.gpp <- predict(model.gpp, data, training_set)
 evaluate_prediction(pred.gpp)
+```
 
-## ------------------------------------------------------------------------
+# Analyze fitted parameters
+back to daily data
+We load the daily data of Munich for PM2.5
+
+```{r }
 data("muc_airPol_p2")
+```
 
-## ------------------------------------------------------------------------
+remove outliers in the data
+
+```{r }
 data <- clean_model_data(muc_airPol_p2, timesIQR = 1.5)
+```
 
-## ------------------------------------------------------------------------
+We use the return parameter of fit_subintervalls() for letting the function
+return the model parameters by setting return = 'parameters'.
+
+```{r }
 formula = value ~ humi + temp + rainhist + windhist +
   trafficvol + log(sensor_age)
 para.1week <- fit_subintervalls(data = data,
@@ -170,11 +246,28 @@ para.1week <- fit_subintervalls(data = data,
                                 unit = '11 days',
                                 scale.transform = scale.transform,
                                 spatial.decay = spatial.decay)
+```
 
-## ------------------------------------------------------------------------
+plot boxplots of the posteriori Mean for each parameter
+we used a splitinterval of 11 days, to avoid that the 31. is in a single
+interval
+
+```{r }
 plot(para.1week)
+```
 
-## ------------------------------------------------------------------------
+# How to choose the knots
+There are three methods how to specify the knots
+         (1) Use a matrix of your favorite knots coordinates
+         (2) Specify a regular grid by choosing the column and row count
+         (3) Choose a random knots location based on the density of the
+             position of the sensors.
+For more details see the master-thesis:
+      Spatio-temporal modelling of air pollution open data
+(1): I don't have my favorite locations in Munich in coordinates, so I choose
+randomly 20 grid points from the dataset muc_airPol_p2_grid
+
+```{r }
 data("muc_airPol_p2_grid")
 set.seed(2202)
 count <- nrow(unique(muc_airPol_p2_grid[, .(lon, lat)]))
@@ -191,8 +284,11 @@ model.gpp.selected <- fit_sp_model(data = data,
                              spatial.decay = spatial.decay)
 
 pred.gpp.selected <- predict(model.gpp.selected, data, training_set)
+```
 
-## ------------------------------------------------------------------------
+(2) I want a 5 times 4 grid, so I set knots_count = c(5,4)
+
+```{r }
 model.gpp.grid <- fit_sp_model(data = data,
                           formula = formula,
                           model = 'GPP',
@@ -204,8 +300,12 @@ model.gpp.grid <- fit_sp_model(data = data,
                           scale.transform = scale.transform,
                           spatial.decay = spatial.decay)
 pred.gpp.grid <- predict(model.gpp.grid, data, training_set)
+```
 
-## ------------------------------------------------------------------------
+(3) I want to set 20 random knots based on the sensor density
+
+
+```{r }
 model.gpp.random <- fit_sp_model(data = data,
                           formula = formula,
                           model = 'GPP',
@@ -219,9 +319,12 @@ model.gpp.random <- fit_sp_model(data = data,
                           scale.transform = scale.transform,
                           spatial.decay = spatial.decay)
 pred.gpp.random <- predict(model.gpp.random, data, training_set)
+```
 
-## ------------------------------------------------------------------------
+Compair the results
+
+```{r }
 evaluate_prediction_table(list('pred.gpp.selected' = pred.gpp.selected,
                                'pred.gpp.grid' = pred.gpp.grid,
                                'pred.gpp.random' = pred.gpp.random))
-
+```

@@ -1,6 +1,5 @@
 # README
 
-## General Notes
 
 This package was built during my master thesis (Spatio-temporal modelling of air pollution open data). With the help of this R-package it is possible to reproduce all results of the master thesis.
 

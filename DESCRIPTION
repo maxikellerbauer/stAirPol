@@ -4,10 +4,13 @@ Title: Spatio-temporal Modelling of Air Pollution Data
 Version: 0.1.0
 Author: Maxi Kellerbauer
 Maintainer: Maxi Kellerbauer <maxi.kellerbauer@googlemail.com>
-Description: Spatio-temporal Modelling of Air Pollution Data. This package takes the air pollution data from www.luftdaten.info, combines that data with metrological data from the Deutschen Wetter Dienst and aggregates it to different time intervals. With that aggregated data it's possible to perform Bayesian hierarchical spatio temporal modelling on it. The Bayesian Modelling is based on the spTimer package.
+Description: Spatio-temporal Modelling of Air Pollution Data. This package takes the air pollution data from http://luftdaten.info, combines that data with metrological data from http://dwd.de, traffic informations from http://opentransportmap.info/ and informations about streets from https://openstreetmap.org and aggregates it to different time intervals. With that aggregated data it's possible to perform bayesian hierarchical spatio temporal modelling on it. The bayesian modelling is based on the `spTimer` package.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 LinkingTo: Rcpp
 Imports: DBI, RSQLite, curl, data.table, ggplot2, pbmcapply, sf, spTimer, MASS, Rcpp, automap, dplyr, dplyr, ggsn, lubridate, parallel, pbmcapply, readr, sf, sp
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
