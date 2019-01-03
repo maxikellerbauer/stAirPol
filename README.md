@@ -4,7 +4,7 @@
 
 This package was built during my master thesis (Spatio-temporal modelling of air pollution open data). With the help of this R-package it is possible to reproduce all results of the master thesis.
 
-It's possible to use that package for a spatio-temporal modelling of air pollution (particulate matter:  $\text{PM}_10$, $\text{PM}_{2.5}$) in subareas of Germany. With some adjustments, it should be possible to model areas outside of Germany, or modelling some other air pollution substances like $O_3$ or $NO_x$.
+It's possible to use that package for a spatio-temporal modelling of air pollution (particulate matter:  <img src="https://latex.codecogs.com/gif.latex?\text{PM}_10, \text{PM}_{2.5}>) in subareas of Germany. With some adjustments, it should be possible to model areas outside of Germany, or modelling some other air pollution substances like <img src="https://latex.codecogs.com/gif.latex?O_3> or <img src="https://latex.codecogs.com/gif.latex?NO_x>.
 
 This package takes the air pollution data from www.luftdaten.info, combines that data with metrological data from the Deutschen Wetter Dienst and aggregates it to different time intervals. With that aggregated data it's possible to perform Bayesian hierarchical spatio temporal modelling on it. The Bayesian Modelling is based on the spTimer package.
 
